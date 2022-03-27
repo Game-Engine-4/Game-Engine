@@ -3,9 +3,10 @@ package Vectors;
 import org.joml.Math;
 
 public class Vector3 {
-    public float x;
-    public float y;
-    public float z;
+
+    private float x;
+    private float y;
+    private float z;
 
     public Vector3() {
     }
@@ -34,7 +35,7 @@ public class Vector3 {
         float x = v1.x - v2.x;
         float y = v1.y - v2.y;
         float z = v1.z - v2.z;
-        return x*x + y*y + z*z;
+        return x * x + y * y + z * z;
     }
 
     public static float distance(Vector3 v1, Vector3 v2) {
@@ -91,15 +92,13 @@ public class Vector3 {
         return dest;
     }
 
-    public float dot(Vector3 v)
-    {
+    public float dot(Vector3 v) {
         return this.x * v.x + this.y * v.y + this.z * v.z;
     }
 
     public Vector3 normalize() {
         float l = this.length();
-        if (l != 0)
-        {
+        if (l != 0) {
             this.x /= l;
             this.y /= l;
             this.z /= l;
@@ -207,7 +206,7 @@ public class Vector3 {
     public Vector3 rotateY(float angle, Vector3 dest) {
         float sin = Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
-        float k =  this.x * cos + this.z * sin;
+        float k = this.x * cos + this.z * sin;
         float t = -this.x * sin + this.z * cos;
         dest.x = k;
         dest.y = this.y;
@@ -234,6 +233,18 @@ public class Vector3 {
         dest.y = t;
         dest.z = this.z;
         return dest;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public float getZ() {
+        return z;
     }
 
 }
