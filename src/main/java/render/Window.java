@@ -1,11 +1,15 @@
 package render;
 
+import Movement.Keyboard;
+import Movement.Mouse;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 public class Window {
     private final String title;
@@ -45,6 +49,11 @@ public class Window {
         window = GLFW.glfwCreateWindow(width, height, title, MemoryUtil.NULL, MemoryUtil.NULL);
         if(window == MemoryUtil.NULL)
         throw new RuntimeException("Failed to create GLFW window");
+
+        glfwSetCursorPosCallback(window, Mouse:: mousePosCallBack);
+        glfwSetMouseButtonCallback(window, Mouse:: mouseButtonCallBack);
+        glfwSetScrollCallback(window, Mouse:: mouseScrollCall);
+        glfwSetKeyCallback(window, Keyboard:: keyCallBack);
 
         GLFW.glfwSetFramebufferSizeCallback (window, (window, width, height) -> {
             this.width = width;
