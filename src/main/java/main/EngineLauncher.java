@@ -12,9 +12,9 @@ public class EngineLauncher {
         window = new Window(Const.TITLE, 1600, 900, false);
         engine = new EngineCore();
 
-        try{
+        try {
             engine.start();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

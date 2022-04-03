@@ -1,15 +1,20 @@
 package Movement;
 
+import org.lwjgl.glfw.GLFW;
+import render.Window;
+
 import java.util.Arrays;
 
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Keyboard {
+
     private static Keyboard instance;
     private boolean keyPressed[] = new boolean[350];
     private boolean keyBeginPress[] = new boolean[350];
     private boolean keyDown[] = new boolean[350];
     private boolean keyUp[] = new boolean[350];
+
 
     private Keyboard() {
 
@@ -29,10 +34,10 @@ public class Keyboard {
 
     public static void keyCallback(long window, int key, int scancode, int action, int mods) {
         if (action == GLFW_PRESS) {
-            if(action == GLFW_KEY_DOWN){
+            if (action == GLFW_KEY_DOWN) {
                 get().keyDown[key] = true;
             }
-            if(action == GLFW_KEY_UP){
+            if (action == GLFW_KEY_UP) {
                 get().keyUp[key] = true;
             }
             get().keyPressed[key] = true;
@@ -44,6 +49,8 @@ public class Keyboard {
             get().keyPressed[key] = false;
             get().keyBeginPress[key] = false;
         }
+        if (key == org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE && action == GLFW.GLFW_RELEASE)
+            GLFW.glfwSetWindowShouldClose(window, true);
     }
 
     public static boolean isKeyPressed(int keyCode) {
@@ -53,10 +60,22 @@ public class Keyboard {
     public static boolean keyBeginPress(int keyCode) {
         return get().keyBeginPress[keyCode];
     }
+
     public static boolean isKeyDown(int keyCode) {
         return get().keyDown[keyCode];
     }
+
     public static boolean isKeyUp(int keyCode) {
         return get().keyUp[keyCode];
     }
+
+    public static void updateKey() {
+        glfwSetKeyCallback(Window.getWindow(), Keyboard::keyCallback);
+    }
+
+//    public static boolean updateKey(int keyCode) {
+//        for (keyCode = 0; keyCode < get().keyPressed.length; keyCode++){
+//            return isKeyPressed(keyCode);
+//        }
+//    }
 }

@@ -1,7 +1,8 @@
 package Movement;
 
-import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
-import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
+import render.Window;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 public class Mouse {
     private static Mouse instance;
@@ -95,5 +96,11 @@ public class Mouse {
         } else {
             return false;
         }
+    }
+
+    public static void updateMouse() {
+        glfwSetCursorPosCallback(Window.getWindow(), Mouse::mousePosCallBack);
+        glfwSetMouseButtonCallback(Window.getWindow(), Mouse::mouseButtonCallBack);
+        glfwSetScrollCallback(Window.getWindow(), Mouse::mouseScrollCall);
     }
 }
