@@ -3,14 +3,14 @@ package main;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import render.Window;
-import util.Const;
 
-import java.sql.SQLOutput;
+import static Inputs.Keyboard.updateKey;
+import static Inputs.Mouse.updateMouse;
 
-public class EngineCore{
+public class EngineCore {
     public static final long NANOSECOND = 1000000000L;
     public static final float FRAMERATE = 1000;
-    private int fps;
+    private static int fps;
     private static float frametime = 1.0f / FRAMERATE;
 
     private boolean isRunning;
@@ -65,15 +65,16 @@ public class EngineCore{
                 if(frameCounter >= NANOSECOND){
                     setFps(frames);
                     System.out.println("FPS: " + getFps());
-                    // window.setTitle(Const.TITLE + getFps());
                     frames = 0;
                     frameCounter = 0;
                 }
-
             }
+
             if(render){
                 update();
                 render();
+                updateKey();
+                updateMouse();
                 frames++;
             }
         }

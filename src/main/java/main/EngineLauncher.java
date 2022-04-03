@@ -22,9 +22,9 @@ public class EngineLauncher {
             }
         });
 
-        try{
+        try {
             engine.start();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
