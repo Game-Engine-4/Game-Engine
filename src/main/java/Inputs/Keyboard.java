@@ -1,4 +1,4 @@
-package Input;
+package Inputs;
 
 import org.lwjgl.glfw.GLFW;
 import render.Window;

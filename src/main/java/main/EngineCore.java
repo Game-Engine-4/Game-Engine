@@ -1,14 +1,14 @@
 package main;
 
-import Input.Keyboard;
-import Input.Mouse;
+import Inputs.Keyboard;
+import Inputs.Mouse;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import render.Window;
 import util.Const;
 
-import static Input.Keyboard.updateKey;
-import static Input.Mouse.updateMouse;
+import static Inputs.Keyboard.updateKey;
+import static Inputs.Mouse.updateMouse;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class EngineCore {

@@ -1,4 +1,4 @@
-package Input;
+package Inputs;
 
 import render.Window;
 
