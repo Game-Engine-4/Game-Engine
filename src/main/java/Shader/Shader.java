@@ -11,7 +11,6 @@ public class Shader {
         if(this.program != 0){
             System.out.println("Shader creation failed");
         }
-
     }
     public void bind() {
         glUseProgram(this.program);
@@ -29,8 +28,6 @@ public class Shader {
         addProgram(text,GL_FRAGMENT_SHADER);
     }
 
-
-
     private void compileShader() {
         glLinkProgram(program);
         if(glGetProgrami(program, GL_LINK_STATUS) != 0) {
@@ -43,19 +40,16 @@ public class Shader {
         }
     }
 
-    private void addProgram(String text, int type)
-    {
+    private void addProgram(String text, int type) {
         int shader = glCreateShader(type);
         if(shader == 0){
                System.out.println("Shader creation failed!");
         }
-
         glShaderSource(shader, text);
         glCompileShader(shader);
         if(glGetShaderi(shader, GL_COMPILE_STATUS) == 0) {
                 glGetShaderInfoLog(shader, 1024);
         }
-        // maybe need switch for later
         glAttachShader(program, shader);
     }
 }
