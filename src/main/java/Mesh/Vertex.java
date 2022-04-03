@@ -1,6 +1,6 @@
 package Mesh;
 
-import Vectors.Vector3;
+import Math.Vector3;
 
 public class Vertex {
     public static final int SIZE = 3;

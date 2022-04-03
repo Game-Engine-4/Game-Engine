@@ -1,6 +1,4 @@
-package Quaternion;
-
-import Vectors.Vector3;
+package Math;
 
 public class Quaternion {
 

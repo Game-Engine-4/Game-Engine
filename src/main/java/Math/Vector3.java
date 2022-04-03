@@ -1,4 +1,4 @@
-package Vectors;
+package Math;
 
 import org.joml.Math;
 
