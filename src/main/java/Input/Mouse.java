@@ -1,4 +1,4 @@
-package Movement;
+package Input;
 
 import render.Window;
 

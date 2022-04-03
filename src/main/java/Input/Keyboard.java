@@ -1,4 +1,4 @@
-package Movement;
+package Input;
 
 import org.lwjgl.glfw.GLFW;
 import render.Window;
@@ -73,9 +73,4 @@ public class Keyboard {
         glfwSetKeyCallback(Window.getWindow(), Keyboard::keyCallback);
     }
 
-//    public static boolean updateKey(int keyCode) {
-//        for (keyCode = 0; keyCode < get().keyPressed.length; keyCode++){
-//            return isKeyPressed(keyCode);
-//        }
-//    }
 }
