@@ -2,101 +2,101 @@ package Math;
 
 import org.joml.Math;
 
-public class Vector3 {
+public class Vector3f {
 
     private float x;
     private float y;
     private float z;
 
-    public Vector3() {
+    public Vector3f() {
     }
 
-    public Vector3(float d) {
+    public Vector3f(float d) {
         //    the value of all three component
         this.x = d;
         this.y = d;
         this.z = d;
     }
 
-    public Vector3(float x, float y, float z) {
+    public Vector3f(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public Vector3(Vector3 v) {
+    public Vector3f(Vector3f v) {
         //    Create a new vector with the same values as another
         this.x = v.x;
         this.y = v.y;
         this.z = v.z;
     }
 
-    public static float distanceSquared(Vector3 v1, Vector3 v2) {
+    public static float distanceSquared(Vector3f v1, Vector3f v2) {
         float x = v1.x - v2.x;
         float y = v1.y - v2.y;
         float z = v1.z - v2.z;
         return x * x + y * y + z * z;
     }
 
-    public static float distance(Vector3 v1, Vector3 v2) {
+    public static float distance(Vector3f v1, Vector3f v2) {
         return Math.sqrt(distanceSquared(v1, v2));
     }
 
-    public Vector3 add(float dx, float dy, float dz) {
+    public Vector3f add(float dx, float dy, float dz) {
         this.x += dx;
         this.y += dy;
         this.z += dz;
         return this;
     }
 
-    public Vector3 add(final Vector3 v) {
+    public Vector3f add(final Vector3f v) {
         return this.add(v.x, v.y, v.z);
     }
 
-    public Vector3 sub(final Vector3 v) {
+    public Vector3f sub(final Vector3f v) {
         return this.sub(v.x, v.y, v.z);
     }
 
-    public Vector3 sub(float dx, float dy, float dz) {
+    public Vector3f sub(float dx, float dy, float dz) {
         this.x -= dx;
         this.y -= dy;
         this.z -= dz;
         return this;
     }
 
-    public Vector3 mul(Vector3 v) {
+    public Vector3f mul(Vector3f v) {
         this.x = x * v.x;
         this.y = y * v.y;
         this.z = z * v.z;
         return this;
     }
 
-    public Vector3 mul(Vector3 v, Vector3 dest) {
+    public Vector3f mul(Vector3f v, Vector3f dest) {
         dest.x = x * v.x;
         dest.y = y * v.y;
         dest.z = z * v.z;
         return dest;
     }
 
-    public Vector3 div(Vector3 v) {
+    public Vector3f div(Vector3f v) {
         this.x = this.x / v.x;
         this.y = this.y / v.y;
         this.z = this.z / v.z;
         return this;
     }
 
-    public Vector3 div(Vector3 v, Vector3 dest) {
+    public Vector3f div(Vector3f v, Vector3f dest) {
         dest.x = x / v.x;
         dest.y = y / v.y;
         dest.z = z / v.z;
         return dest;
     }
 
-    public float dot(Vector3 v) {
+    public float dot(Vector3f v) {
         return this.x * v.x + this.y * v.y + this.z * v.z;
     }
 
-    public Vector3 normalize() {
+    public Vector3f normalize() {
         float l = this.length();
         if (l != 0) {
             this.x /= l;
@@ -106,7 +106,7 @@ public class Vector3 {
         return this;
     }
 
-    public float angle(Vector3 v) {
+    public float angle(Vector3f v) {
         float dls = dot(v) / (this.length() * v.length());
         if (dls < -1.0f)
             dls = -1.0f;
@@ -115,28 +115,28 @@ public class Vector3 {
         return Math.acos(dls);
     }
 
-    public Vector3 setZero() {
+    public Vector3f setZero() {
         this.x = 0;
         this.y = 0;
         this.z = 0;
         return this;
     }
 
-    public Vector3 set(Vector3 v) {
+    public Vector3f set(Vector3f v) {
         this.x = v.x;
         this.y = v.y;
         this.z = v.z;
         return this;
     }
 
-    public Vector3 set(float x, float y, float z) {
+    public Vector3f set(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
         return this;
     }
 
-    public Vector3 set(float[] array) {
+    public Vector3f set(float[] array) {
         this.x = array[0];
         this.y = array[1];
         this.z = array[2];
@@ -151,7 +151,7 @@ public class Vector3 {
         return Math.sqrt(this.lengthSquared());
     }
 
-    public Vector3 cross(Vector3 v) {
+    public Vector3f cross(Vector3f v) {
         //    Calculates the vector cross product of this vector and the given vector
         float a = this.y * v.z - this.z * v.y;
         float b = this.z * v.x - this.x * v.z;
@@ -164,15 +164,15 @@ public class Vector3 {
         return this;
     }
 
-    public static Vector3 cross(Vector3 a, Vector3 b) {
+    public static Vector3f cross(Vector3f a, Vector3f b) {
         //    Calculates the vector cross product of the two given vectors.
-        return new Vector3(
+        return new Vector3f(
                 a.y * b.z - a.z * b.y,
                 a.z * b.x - a.x * b.z,
                 a.x * b.y - a.y * b.x);
     }
 
-    public Vector3 rotateX(float angle) {
+    public Vector3f rotateX(float angle) {
         float sin = Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
         float k = this.y * cos - this.z * sin;
@@ -182,7 +182,7 @@ public class Vector3 {
         return this;
     }
 
-    public Vector3 rotateX(float angle, Vector3 dest) {
+    public Vector3f rotateX(float angle, Vector3f dest) {
         float sin = Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
         float k = this.y * cos - this.z * sin;
@@ -193,7 +193,7 @@ public class Vector3 {
         return dest;
     }
 
-    public Vector3 rotateY(float angle) {
+    public Vector3f rotateY(float angle) {
         float sin = Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
         float k = this.x * cos + this.z * sin;
@@ -203,7 +203,7 @@ public class Vector3 {
         return this;
     }
 
-    public Vector3 rotateY(float angle, Vector3 dest) {
+    public Vector3f rotateY(float angle, Vector3f dest) {
         float sin = Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
         float k = this.x * cos + this.z * sin;
@@ -214,7 +214,7 @@ public class Vector3 {
         return dest;
     }
 
-    public Vector3 rotateZ(float angle) {
+    public Vector3f rotateZ(float angle) {
         float sin = Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
         float k = this.x * cos - this.y * sin;
@@ -224,7 +224,7 @@ public class Vector3 {
         return this;
     }
 
-    public Vector3 rotateZ(float angle, Vector3 dest) {
+    public Vector3f rotateZ(float angle, Vector3f dest) {
         float sin = Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
         float k = this.x * cos - this.y * sin;

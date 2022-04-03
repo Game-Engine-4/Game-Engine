@@ -2,20 +2,20 @@ package Math;
 
 import org.joml.Math;
 
-public class Vector2 {
+public class Vector2f {
     public float x;
     public float y;
 
     /** Contructs vector with x&y component of zero. */
-    public Vector2() {
+    public Vector2f() {
     }
 
-    public Vector2(float x, float y) {
+    public Vector2f(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
-    public Vector2(Vector2 other) {
+    public Vector2f(Vector2f other) {
         this.set(other);
     }
 
@@ -24,7 +24,7 @@ public class Vector2 {
         this.y = y;
     }
 
-    public void set(Vector2 v) {
+    public void set(Vector2f v) {
         this.x = v.x;
         this.y = v.y;
     }
@@ -42,7 +42,7 @@ public class Vector2 {
         return Math.sqrt(x*x + y*y);
     }
 
-    public Vector2 normalize() {
+    public Vector2f normalize() {
         float magnitude = magnitude();
 
         if(magnitude != 0) {
@@ -53,13 +53,13 @@ public class Vector2 {
         return this;
     }
 
-    public Vector2 getNormalized() {
+    public Vector2f getNormalized() {
         float magnitude = magnitude();
-        return new Vector2(x / magnitude, y / magnitude);
+        return new Vector2f(x / magnitude, y / magnitude);
     }
 
-    public static Vector2 toCartesian(float magnitude, float angle) {
-        return new Vector2(magnitude * Math.cos(angle), magnitude * Math.sin(angle));
+    public static Vector2f toCartesian(float magnitude, float angle) {
+        return new Vector2f(magnitude * Math.cos(angle), magnitude * Math.sin(angle));
     }
 
     public void rotateBy(float angle) {
@@ -70,17 +70,17 @@ public class Vector2 {
         x = rx;
     }
 
-    public Vector2 getRotatedBy(float angle) {
+    public Vector2f getRotatedBy(float angle) {
         float cos = Math.cos(angle);
         float sin = Math.sin(angle);
-        return new Vector2(x * cos - y * sin, x * sin + y * cos);
+        return new Vector2f(x * cos - y * sin, x * sin + y * cos);
     }
 
     public void rotateTo(float angle) {
         set(toCartesian(length(), angle));
     }
 
-    public Vector2 getRotatedTo(float angle) {
+    public Vector2f getRotatedTo(float angle) {
         return toCartesian(length(), angle);
     }
 
@@ -88,7 +88,7 @@ public class Vector2 {
         return Math.atan2(y, x);
     }
 
-    public float dot(Vector2 v) {
+    public float dot(Vector2f v) {
         return (this.x * v.x + this.y * v.y);
     }
 
@@ -96,11 +96,11 @@ public class Vector2 {
         return (this.x * vx + this.y * vy);
     }
 
-    public static float dot(Vector2 v1, Vector2 v2) {
+    public static float dot(Vector2f v1, Vector2f v2) {
         return v1.x * v2.x + v1.y * v2.y;
     }
 
-    public float cross(Vector2 v) {
+    public float cross(Vector2f v) {
         return (this.x * v.y - this.y * v.x);
     }
 
@@ -108,81 +108,81 @@ public class Vector2 {
         return (this.x * vy - this.y * vx);
     }
 
-    public static float cross(Vector2 v1, Vector2 v2) {
+    public static float cross(Vector2f v1, Vector2f v2) {
         return (v1.x * v2.y - v1.y * v2.x);
     }
 
-    public Vector2 add(Vector2 other) {
+    public Vector2f add(Vector2f other) {
         this.x += other.x;
         this.y += other.y;
 
         return this;
     }
 
-    public Vector2 add(float x, float y) {
+    public Vector2f add(float x, float y) {
         this.x += x;
         this.y += y;
 
         return this;
     }
 
-    public Vector2 add(float amount) {
+    public Vector2f add(float amount) {
         this.x += amount;
         this.y += amount;
 
         return this;
     }
 
-    public Vector2 sub(float amount) {
+    public Vector2f sub(float amount) {
         this.x -= amount;
         this.y -= amount;
 
         return this;
     }
 
-    public Vector2 sub(float x, float y) {
+    public Vector2f sub(float x, float y) {
         this.x -= x;
         this.y -= y;
 
         return this;
     }
 
-    public Vector2 sub(Vector2 other) {
+    public Vector2f sub(Vector2f other) {
         this.x -= other.x;
         this.y -= other.y;
 
         return this;
     }
 
-    public Vector2 mul(float scalar) {
+    public Vector2f mul(float scalar) {
         this.x *= scalar;
         this.y *= scalar;
 
         return this;
     }
 
-    public Vector2 mul(Vector2 other) {
+    public Vector2f mul(Vector2f other) {
         this.x *= other.x;
         this.y *= other.y;
 
         return this;
     }
 
-    public Vector2 div(float scalar) {
+    public Vector2f div(float scalar) {
         this.x /= scalar;
         this.y /= scalar;
 
         return this;
     }
 
-    public Vector2 div(Vector2 other) {
+    public Vector2f div(Vector2f other) {
         this.x /= this.x;
         this.y /= this.y;
 
         return this;
     }
 
-    public float distance(Vector2 other) {
+    public float distance(Vector2f other) {
         float distX = this.x - other.x;
         float distY = this.y - other.y;
 
@@ -196,7 +196,7 @@ public class Vector2 {
         return (float)Math.sqrt(distX*distX + distY*distY);
     }
 
-    public float distSquared(Vector2 other) {
+    public float distSquared(Vector2f other) {
         float distX = this.x - other.x;
         float distY = this.y - other.y;
 
