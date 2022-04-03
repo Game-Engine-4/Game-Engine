@@ -15,7 +15,6 @@ public class Keyboard {
     private boolean keyDown[] = new boolean[350];
     private boolean keyUp[] = new boolean[350];
 
-
     private Keyboard() {
 
     }
@@ -28,16 +27,15 @@ public class Keyboard {
         if (Keyboard.instance == null) {
             Keyboard.instance = new Keyboard();
         }
-
         return Keyboard.instance;
     }
 
     public static void keyCallback(long window, int key, int scancode, int action, int mods) {
         if (action == GLFW_PRESS) {
-            if (action == GLFW_KEY_DOWN) {
+            if (key == GLFW_KEY_DOWN) {
                 get().keyDown[key] = true;
             }
-            if (action == GLFW_KEY_UP) {
+            if (key == GLFW_KEY_UP) {
                 get().keyUp[key] = true;
             }
             get().keyPressed[key] = true;
