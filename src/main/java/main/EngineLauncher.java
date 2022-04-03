@@ -9,8 +9,18 @@ public class EngineLauncher {
 
     public static void main(String[] args) {
 
-        window = new Window(Const.TITLE, 1600, 900, false);
-        engine = new EngineCore();
+        window = new Window(Const.TITLE, 1600, 900, true);
+        engine = new EngineCore(new Game() {
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void render() {
+
+            }
+        });
 
         try {
             engine.start();

@@ -1,45 +1,50 @@
 package main;
 
-import Inputs.Keyboard;
-import Inputs.Mouse;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import render.Window;
-import util.Const;
 
 import static Inputs.Keyboard.updateKey;
 import static Inputs.Mouse.updateMouse;
-import static org.lwjgl.glfw.GLFW.*;
 
 public class EngineCore {
     public static final long NANOSECOND = 1000000000L;
     public static final float FRAMERATE = 1000;
     private static int fps;
     private static float frametime = 1.0f / FRAMERATE;
+
     private boolean isRunning;
+
     private Window window;
     private GLFWErrorCallback errorCallback;
 
-    private void init() throws Exception {
+    private Game game;
+
+    public EngineCore(Game game){
+        this.game = game;
+    }
+
+    private void init() throws Exception{
         GLFW.glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
         window = EngineLauncher.getWindow();
         window.init();
     }
 
-    public void start() throws Exception {
+    public void start() throws Exception{
+        if(isRunning)
+            return;
         init();
-        if (isRunning) return;
         run();
     }
 
-    public void run() {
+    public void run(){
         this.isRunning = true;
         int frames = 0;
         long frameCounter = 0;
         long lastTime = System.nanoTime();
         double unprocessedTime = 0;
 
-        while (isRunning) {
+        while (isRunning){
             boolean render = false;
             long startTime = System.nanoTime();
             long passedTime = startTime - lastTime;
@@ -47,23 +52,25 @@ public class EngineCore {
 
             unprocessedTime += passedTime / (double) NANOSECOND;
             frameCounter += passedTime;
+
             input();
 
-            while (unprocessedTime > frametime) {
+            while (unprocessedTime > frametime){
                 render = true;
                 unprocessedTime -= frametime;
 
-                if (window.shouldClose()) stop();
+                if(window.shouldClose())
+                    stop();
 
-                if (frameCounter >= NANOSECOND) {
+                if(frameCounter >= NANOSECOND){
                     setFps(frames);
-                    window.setTitle(Const.TITLE + getFps());
+                    System.out.println("FPS: " + getFps());
                     frames = 0;
                     frameCounter = 0;
                 }
             }
 
-            if (render) {
+            if(render){
                 update();
                 render();
                 updateKey();
@@ -74,38 +81,36 @@ public class EngineCore {
         cleanup();
     }
 
-    private void stop() {
-        if (!isRunning) return;
+    private void stop(){
+        if(!isRunning)
+            return;
         isRunning = false;
     }
 
-    private void input() {
+    private void input(){
+
     }
 
-    private void render() {
+    public void render(){
+        game.render();
     }
 
-    private void update() {
+    public void update(){
+        game.update();
         window.update();
-        if (Keyboard.isKeyPressed(GLFW_KEY_SPACE)) {
-            System.out.println("Space Key is pressed");
-        }
-        if (Mouse.mouseButtonDown(GLFW_MOUSE_BUTTON_1)) {
-            System.out.println("Mouse Pressed");
-        }
     }
 
-    private void cleanup() {
+    private void cleanup(){
         window.cleanup();
         errorCallback.free();
         GLFW.glfwTerminate();
     }
 
-    public static int getFps() {
+    public int getFps() {
         return fps;
     }
 
-    public static void setFps(int fps) {
-        EngineCore.fps = fps;
+    private void setFps(int fps){
+        this.fps = fps;
     }
 }
