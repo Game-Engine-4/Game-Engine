@@ -1,14 +1,14 @@
 package main;
 
-import Movement.Keyboard;
-import Movement.Mouse;
+import Input.Keyboard;
+import Input.Mouse;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import render.Window;
 import util.Const;
 
-import static Movement.Keyboard.updateKey;
-import static Movement.Mouse.updateMouse;
+import static Input.Keyboard.updateKey;
+import static Input.Mouse.updateMouse;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class EngineCore {
@@ -47,10 +47,7 @@ public class EngineCore {
 
             unprocessedTime += passedTime / (double) NANOSECOND;
             frameCounter += passedTime;
-
-
             input();
-
 
             while (unprocessedTime > frametime) {
                 render = true;
@@ -96,8 +93,6 @@ public class EngineCore {
         if (Mouse.mouseButtonDown(GLFW_MOUSE_BUTTON_1)) {
             System.out.println("Mouse Pressed");
         }
-
-
     }
 
     private void cleanup() {
