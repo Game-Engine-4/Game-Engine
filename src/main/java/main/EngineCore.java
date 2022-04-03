@@ -5,16 +5,24 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import render.Window;
 import util.Const;
 
-public class EngineCore {
+import java.sql.SQLOutput;
+
+public class EngineCore{
     public static final long NANOSECOND = 1000000000L;
     public static final float FRAMERATE = 1000;
-    private static int fps;
+    private int fps;
     private static float frametime = 1.0f / FRAMERATE;
 
     private boolean isRunning;
 
     private Window window;
     private GLFWErrorCallback errorCallback;
+
+    private Game game;
+
+    public EngineCore(Game game){
+        this.game = game;
+    }
 
     private void init() throws Exception{
         GLFW.glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
@@ -23,9 +31,9 @@ public class EngineCore {
     }
 
     public void start() throws Exception{
-        init();
         if(isRunning)
             return;
+        init();
         run();
     }
 
@@ -56,12 +64,13 @@ public class EngineCore {
 
                 if(frameCounter >= NANOSECOND){
                     setFps(frames);
-                    window.setTitle(Const.TITLE + getFps());
+                    System.out.println("FPS: " + getFps());
+                    // window.setTitle(Const.TITLE + getFps());
                     frames = 0;
                     frameCounter = 0;
                 }
-            }
 
+            }
             if(render){
                 update();
                 render();
@@ -81,12 +90,13 @@ public class EngineCore {
 
     }
 
-    private void render(){
-        window.update();
+    public void render(){
+        game.render();
     }
 
-    private void update(){
-
+    public void update(){
+        game.update();
+        window.update();
     }
 
     private void cleanup(){
@@ -95,11 +105,11 @@ public class EngineCore {
         GLFW.glfwTerminate();
     }
 
-    public static int getFps() {
+    public int getFps() {
         return fps;
     }
 
-    public static void setFps(int fps){
-        EngineCore.fps = fps;
+    private void setFps(int fps){
+        this.fps = fps;
     }
 }
