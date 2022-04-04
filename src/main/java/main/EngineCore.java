@@ -68,10 +68,12 @@ public class EngineCore {
                     frames = 0;
                     frameCounter = 0;
                 }
+
+                update();
+
             }
 
             if(render){
-                update();
                 render();
                 frames++;
             }
@@ -91,6 +93,7 @@ public class EngineCore {
 
     public void render(){
         game.render();
+        window.render();
     }
 
     public void update(){
