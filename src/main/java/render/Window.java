@@ -13,6 +13,13 @@ public class Window {
     private static long window;
     private boolean resize, vSync;
 
+    public Window(String title, int width, int height) {
+        this.title = title;
+        this.width = width;
+        this.height = height;
+        this.vSync = false;
+    }
+
     public Window(String title, int width, int height, boolean vSync) {
         this.title = title;
         this.width = width;
@@ -78,8 +85,11 @@ public class Window {
     }
 
     public void update() {
-        GLFW.glfwSwapBuffers(window);
         GLFW.glfwPollEvents();
+    }
+
+    public void render(){
+        GLFW.glfwSwapBuffers(window);
     }
 
     public void cleanup() {
