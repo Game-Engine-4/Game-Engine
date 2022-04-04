@@ -32,18 +32,10 @@ public class Keyboard {
 
     public static void keyCallback(long window, int key, int scancode, int action, int mods) {
         if (action == GLFW_PRESS) {
-            if (key == GLFW_KEY_DOWN) {
-                get().keyDown[key] = true;
-            }
-            if (key == GLFW_KEY_UP) {
-                get().keyUp[key] = true;
-            }
             get().keyPressed[key] = true;
             get().keyBeginPress[key] = true;
 
         } else if (action == GLFW_RELEASE) {
-            get().keyDown[key] = false;
-            get().keyUp[key] = false;
             get().keyPressed[key] = false;
             get().keyBeginPress[key] = false;
         }
