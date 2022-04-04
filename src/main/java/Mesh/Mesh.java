@@ -11,8 +11,13 @@ public class Mesh {
         this.size = 0;
     }
 
-    public void addVertices(Vertex[] vertices){
-        size = vertices.length * Vertex.SIZE;
+    private void addVertices(Vertex[] vertices) {
+        this.size = vertices.length;
+        glBindBuffer(GL_ARRAY_BUFFER, this.vbo);
+        glBufferData(GL_ARRAY_BUFFER, Util.createFlippedBuffer(vertices), GL_STATIC_DRAW);
+    }
+
+    public void draw() {
         glEnableVertexAttribArray(0);
 
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -22,4 +27,6 @@ public class Mesh {
 
         glDisableVertexAttribArray(0);
     }
+
+
 }
