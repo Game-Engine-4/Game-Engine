@@ -73,8 +73,6 @@ public class EngineCore {
             if(render){
                 update();
                 render();
-                updateKey();
-                updateMouse();
                 frames++;
             }
         }
@@ -98,6 +96,8 @@ public class EngineCore {
     public void update(){
         game.update();
         window.update();
+        updateKey();
+        updateMouse();
     }
 
     private void cleanup(){
