@@ -17,7 +17,7 @@ public class Window {
         this.title = title;
         this.width = width;
         this.height = height;
-        this.vSync = false;
+        this.vSync = true;
     }
 
     public Window(String title, int width, int height, boolean vSync) {
