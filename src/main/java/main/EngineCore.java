@@ -7,7 +7,7 @@ import render.Window;
 import static Inputs.Keyboard.updateKey;
 import static Inputs.Mouse.updateMouse;
 
-public class EngineCore {
+public class EngineCore implements Runnable {
     public static final long NANOSECOND = 1000000000L;
     public static final float FRAMERATE = 1000;
     private static int fps;
@@ -36,7 +36,7 @@ public class EngineCore {
         init();
         run();
     }
-
+    @Override
     public void run(){
         this.isRunning = true;
         int frames = 0;
