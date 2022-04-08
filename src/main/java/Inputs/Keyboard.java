@@ -12,8 +12,7 @@ public class Keyboard {
     private static Keyboard instance;
     private boolean keyPressed[] = new boolean[350];
     private boolean keyBeginPress[] = new boolean[350];
-    private boolean keyDown[] = new boolean[350];
-    private boolean keyUp[] = new boolean[350];
+    private static int keys[] = new int[350];
 
     private Keyboard() {
 
@@ -52,11 +51,11 @@ public class Keyboard {
     }
 
     public static boolean isKeyDown(int keyCode) {
-        return get().keyDown[keyCode];
+        return !isKeyPressed(keyCode) && get().keyBeginPress[keyCode];
     }
 
     public static boolean isKeyUp(int keyCode) {
-        return get().keyUp[keyCode];
+        return keys[keyCode] == GLFW_RELEASE;
     }
 
     public static void updateKey() {
