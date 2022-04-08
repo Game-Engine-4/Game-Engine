@@ -1,4 +1,4 @@
-package Mesh;
+package MeshShader;
 
 import Math.Vector3f;
 

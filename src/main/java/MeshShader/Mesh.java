@@ -1,4 +1,4 @@
-package Mesh;
+package MeshShader;
 
 import static org.lwjgl.opengles.GLES20.*;
 

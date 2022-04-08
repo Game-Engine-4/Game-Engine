@@ -1,4 +1,4 @@
-package Mesh;
+package MeshShader;
 
 import org.lwjgl.BufferUtils;
 

@@ -1,4 +1,4 @@
-package Shader;
+package MeshShader;
 
 import static org.lwjgl.opengles.GLES20.*;
 import static org.lwjgl.opengles.GLES32.GL_GEOMETRY_SHADER;
