@@ -1,119 +1,105 @@
 package main;
 
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.GLFWErrorCallback;
+import Inputs.Input;
+import Test.Demo;
 import render.Window;
-
-import static Inputs.Keyboard.updateKey;
-import static Inputs.Mouse.updateMouse;
+import util.Time;
 
 public class EngineCore implements Runnable {
-    public static final long NANOSECOND = 1000000000L;
-    public static final float FRAMERATE = 1000;
-    private static int fps;
-    private static float frametime = 1.0f / FRAMERATE;
 
-    private boolean isRunning;
-
-    private Window window;
-    private GLFWErrorCallback errorCallback;
-
+    private Thread loopthread;
+    private boolean running = false;
+    private boolean isRendered = false;
+    private static final int width = 1280;
+    private static final int height = 760;
+    private Time time = new Time();
+    private static Window frame = new Window(EngineCore.width, EngineCore.height, "Game Engine");
+    private Input input = new Input();
     private Game game;
 
-    public EngineCore(Game game){
+
+    public EngineCore(Game game) {
         this.game = game;
     }
 
-    private void init() throws Exception{
-        GLFW.glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
-        window = EngineLauncher.getWindow();
-        window.init();
-    }
-
-    public void start() throws Exception{
-        if(isRunning)
-            return;
-        init();
-        run();
-    }
-    @Override
-    public void run(){
-        this.isRunning = true;
-        int frames = 0;
-        long frameCounter = 0;
-        long lastTime = System.nanoTime();
-        double unprocessedTime = 0;
-
-        while (isRunning){
-            boolean render = false;
-            long startTime = System.nanoTime();
-            long passedTime = startTime - lastTime;
-            lastTime = startTime;
-
-            unprocessedTime += passedTime / (double) NANOSECOND;
-            frameCounter += passedTime;
-
-            input();
-
-            while (unprocessedTime > frametime){
-                render = true;
-                unprocessedTime -= frametime;
-
-                if(window.shouldClose())
-                    stop();
-
-                if(frameCounter >= NANOSECOND){
-                    setFps(frames);
-                    System.out.println("FPS: " + getFps());
-                    frames = 0;
-                    frameCounter = 0;
-                }
-
-                update();
-
-            }
-
-            if(render){
-                render();
-                frames++;
-            }
+    public void start() {
+        if (!this.running) {
+            this.running = true;
+            this.loopthread = new Thread(this);
+            this.loopthread.start();
         }
-        cleanup();
     }
 
-    private void stop(){
-        if(!isRunning)
-            return;
-        isRunning = false;
+    public boolean stop() throws InterruptedException {
+        this.running = false;
+        this.loopthread = null;
+        return true;
     }
 
-    private void input(){
+    @Override
+    public void run() {
+        frame.init();
+        game.init();
+        this.time.setPreviousTime((double) System.nanoTime());
+        float DeltaTime = 0;
+        while (this.running) {
+
+            if (frame.close()) {
+                try {
+                    this.stop();
+                    return;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            this.time.setCurrentTime((double) System.nanoTime());
+            this.time.setDeltaTime(this.time.calculateDeltaTime());
+            DeltaTime += this.time.calculateDeltaTime();
+            Double TempGameRate = this.time.GameRate * 1000000000;
+            while (DeltaTime >= TempGameRate) {
+                DeltaTime -= TempGameRate;
+                update();
+            }
+            if (!isRendered) {
+                try {
+                    render();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            this.time.setPreviousTime(this.time.getCurrentTime());
+        }
 
     }
 
-    public void render(){
-        game.render();
-        window.render();
+    private void update() {
+        this.input.update();
+        this.frame.update();
+        this.game.update();
+        this.isRendered = false;
     }
 
-    public void update(){
-        game.update();
-        window.update();
-        updateKey();
-        updateMouse();
+    private void render() throws InterruptedException {
+        this.frame.render();
+        this.game.render();
     }
 
-    private void cleanup(){
-        window.cleanup();
-        errorCallback.free();
-        GLFW.glfwTerminate();
+    private void clean() {
+        this.frame.cleanup();
     }
 
-    public int getFps() {
-        return fps;
+    public boolean isRunning() {
+        return this.running;
     }
 
-    private void setFps(int fps){
-        this.fps = fps;
+    public Input getInput() {
+        return this.input;
     }
+
+    public static void main(String[] args) throws InterruptedException {
+        EngineCore engine = new EngineCore(new Demo());
+        engine.start();
+    }
+
+
 }
