@@ -1,142 +1,110 @@
 package render;
 
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.GLFWErrorCallback;
+import static org.lwjgl.glfw.GLFW.*;
+import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
 
 public class Window {
-    private final String title;
-    private int width, height;
-    private static long window;
-    private boolean resize, vSync;
 
-    public Window(String title, int width, int height) {
-        this.title = title;
+    private final int width;
+    private final int height;
+    private final String title;
+    private static long window;
+    private final GLFWImage.Buffer icon;
+
+    public Window(int width, int height, String title) {
         this.width = width;
         this.height = height;
-        this.vSync = true;
+        this.title = title;
+        this.icon = null;
     }
 
-    public Window(String title, int width, int height, boolean vSync) {
-        this.title = title;
+    public Window(int width, int height, String title, GLFWImage.Buffer icon) {
         this.width = width;
         this.height = height;
-        this.vSync = vSync;
+        this.title = title;
+        this.icon = icon;
     }
 
     public void init() {
-        GLFWErrorCallback.createPrint(System.err).set();
-
-        if (!GLFW.glfwInit())
-            throw new IllegalStateException("Unable to initialize GLFW");
-
-        GLFW.glfwDefaultWindowHints();
-        GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GL11.GL_FALSE);
-        GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GL11.GL_TRUE);
-        GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 3);
-        GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 2);
-        GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_PROFILE, GLFW.GLFW_OPENGL_CORE_PROFILE);
-        GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_FORWARD_COMPAT, GL11.GL_TRUE);
-
-        boolean maximised = false;
-        if (width == 0 || height == 0) {
-            width = 100;
-            height = 100;
-            GLFW.glfwWindowHint(GLFW.GLFW_MAXIMIZED, GLFW.GLFW_TRUE);
-            maximised = true;
+        if (!glfwInit()) {
+            throw new RuntimeException("core.Window could not be initialised");
         }
 
-        window = GLFW.glfwCreateWindow(width, height, title, MemoryUtil.NULL, MemoryUtil.NULL);
-        if (window == MemoryUtil.NULL)
-            throw new RuntimeException("Failed to create GLFW window");
+        // Configurations for the core.Window
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+        glfwWindowHint(GLFW_FOCUSED, GLFW_TRUE);
 
-        GLFW.glfwSetFramebufferSizeCallback(window, (window, width, height) -> {
-            this.width = width;
-            this.height = height;
-            this.setResize(true);
-        });
+        window = glfwCreateWindow(width, height, title, MemoryUtil.NULL, MemoryUtil.NULL);
 
-
-        if (maximised)
-            GLFW.glfwMaximizeWindow(window);
-        else {
-            GLFWVidMode vidMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
-            GLFW.glfwSetWindowPos(window, (vidMode.width() - width) / 2,
-                    (vidMode.height() - height) / 2);
+        if (window == 0) {
+            throw new RuntimeException("core.Window could not be created");
         }
 
-        GLFW.glfwMakeContextCurrent(window);
+        // Icon
+        if (getIcon() != null) {
+            glfwSetWindowIcon(window, getIcon());
+        }
 
-        if (isvSync())
-            GLFW.glfwSwapInterval(1);
+        // core.Window gets positioned in the center of the screen
+        GLFWVidMode vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        if (vidMode == null) {
+            throw new RuntimeException("GLFWVidMode is null.");
+        }
+        glfwSetWindowPos(window, (vidMode.width() - getWidth()) / 2, (vidMode.height() - getHeight()) / 2);
 
-        GLFW.glfwShowWindow(window);
+        glfwMakeContextCurrent(window);
+
+        // VSync
+        glfwSwapInterval(1);
+
+        glfwShowWindow(window);
 
         GL.createCapabilities();
+    }
 
-        GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GL11.glEnable(GL11.GL_STENCIL_TEST);
-        GL11.glEnable(GL11.GL_CULL_FACE);
-        GL11.glCullFace(GL11.GL_BACK);
+    public void render() {
+        glfwSwapBuffers(window);
     }
 
     public void update() {
-        GLFW.glfwPollEvents();
-    }
-
-    public void render(){
-        GLFW.glfwSwapBuffers(window);
+        glfwPollEvents();
     }
 
     public void cleanup() {
-        GLFW.glfwDestroyWindow(window);
+        glfwDestroyWindow(window);
+        glfwTerminate();
     }
 
-    public void setClearColour(float r, float g, float b, float a) {
-        GL11.glClearColor(r, g, b, a);
+    public boolean close() {
+        boolean shouldClose = glfwWindowShouldClose(window);
+        if (shouldClose) {
+            cleanup();
+        }
+        return shouldClose;
     }
 
-    public boolean isKeyPressed(int keycode) {
-        return GLFW.glfwGetKey(window, keycode) == GLFW.GLFW_PRESS;
-    }
-
-    public boolean shouldClose() {
-        return GLFW.glfwWindowShouldClose(window);
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        GLFW.glfwSetWindowTitle(window, title);
-    }
-
-    public boolean isResize() {
-        return resize;
-    }
-
-    public boolean isvSync() {
-        return vSync;
-    }
-
-    public void setResize(boolean resize) {
-        this.resize = resize;
+    // Getters for the attributes
+    public int getWidth() {
+        return width;
     }
 
     public int getHeight() {
         return height;
     }
 
-    public int getWidth() {
-        return width;
+    public String getTitle() {
+        return title;
+    }
+
+    public GLFWImage.Buffer getIcon() {
+        return icon;
     }
 
     public static long getWindow() {
         return window;
     }
+
 }
