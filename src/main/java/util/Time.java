@@ -1,9 +1,38 @@
 package util;
 
 public class Time {
-    public static float startTime = System.nanoTime();
+    final double fps = 60;
+    Double previousTime = (double) System.nanoTime();
+    Double currentTime =  (double) System.nanoTime();
+    Double deltaTime = 0.0;
+    public final Double GameRate = (Double) 1.0 / this.fps;
 
-    public static float getTime(){
-        return (float) ((System.nanoTime() - startTime) * 1E-9);
+    public Double getCurrentTime() {
+        return this.currentTime;
     }
+
+    public Double getPreviousTime() {
+        return this.previousTime;
+    }
+
+    public void setCurrentTime(Double currentTime) {
+        this.currentTime = currentTime;
+    }
+
+    public void setPreviousTime(Double previousTime) {
+        this.previousTime = previousTime;
+    }
+
+    public void setDeltaTime(Double deltaTime) {
+        this.deltaTime = deltaTime;
+    }
+
+    public Double getDeltaTime() {
+        return this.deltaTime;
+    }
+
+    public Double calculateDeltaTime() {
+        return this.getCurrentTime() - this.getPreviousTime();
+    }
+
 }
