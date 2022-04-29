@@ -1,8 +1,8 @@
 package MeshShader;
 
 import org.lwjgl.BufferUtils;
-
 import java.nio.FloatBuffer;
+import Math.Matrix4x4;
 
 public class Util {
     public static FloatBuffer createFloatBuffer(int size){
@@ -22,5 +22,17 @@ public class Util {
             buffer.flip();
 
             return buffer;
+    }
+
+    public static FloatBuffer createFlippedBuffer(Matrix4x4 value) {
+        FloatBuffer buffer = createFloatBuffer(4 * 4);
+
+        for(int i = 0; i < 4; i++)
+            for(int j = 0; j < 4; j++)
+                buffer.put(value.Get(i, j));
+
+        buffer.flip();
+
+        return buffer;
     }
 }
