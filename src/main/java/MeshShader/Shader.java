@@ -1,12 +1,19 @@
 package MeshShader;
 
 import org.lwjgl.opengl.GL20;
+import java.util.HashMap;
+import Math.Matrix4x4;
+import Math.Vector3f;
+import static org.lwjgl.opengl.GL20.*;
 
 public class Shader {
     private int program;
+    private HashMap<String, Integer> uniforms;
 
     public Shader() {
         this.program = GL20.glCreateProgram();
+        uniforms = new HashMap<String, Integer>();
+
         if(this.program == 0){
             System.out.println("Shader creation failed");
             System.exit(1);
@@ -16,17 +23,17 @@ public class Shader {
         GL20.glUseProgram(this.program);
     }
 
-//    public void addVertexShader(String text){
-//        addProgram(text,GL20.GL_VERTEX_SHADER);
-//    }
+    public void addUniform(String uniform) {
+        int uniformLocation = glGetUniformLocation(program, uniform);
 
-//    public void addGeometryShader(String text) {
-//      addProgram(text, GL20.GL_GEOMETRY_SHADER);
-//    }
+        if(uniformLocation == 0xFFFFFFFF) {
+            System.err.println("Error: Could not find uniform: " + uniform);
+            new Exception().printStackTrace();
+            System.exit(1);
+        }
 
-//    public void addFragmentShader(String text){
-//        addProgram(text,GL20.GL_FRAGMENT_SHADER);
-//    }
+        uniforms.put(uniform, uniformLocation);
+    }
 
     public void compileShader() {
         GL20.glLinkProgram(program);
@@ -59,5 +66,21 @@ public class Shader {
 
     public int getProgram() {
         return program;
+    }
+
+    public void setUniformi(String uniformName, int value) {
+        glUniform1i(uniforms.get(uniformName), value);
+    }
+
+    public void setUniformf(String uniformName, float value) {
+        glUniform1f(uniforms.get(uniformName), value);
+    }
+
+    public void setUniform(String uniformName, Vector3f value) {
+        glUniform3f(uniforms.get(uniformName), value.getX(), value.getY(), value.getZ());
+    }
+
+    public void setUniform(String uniformName, Matrix4x4 value) {
+        glUniformMatrix4fv(uniforms.get(uniformName), true, Util.createFlippedBuffer(value));
     }
 }
