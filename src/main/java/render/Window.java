@@ -5,9 +5,9 @@ import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryUtil;
+import static org.lwjgl.opengl.GL20.*;
 
 public class Window {
-
     private final int width;
     private final int height;
     private final String title;
@@ -74,8 +74,7 @@ public class Window {
     }
 
     public void cleanup() {
-        glfwDestroyWindow(window);
-        glfwTerminate();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     public boolean close() {
@@ -106,5 +105,4 @@ public class Window {
     public static long getWindow() {
         return window;
     }
-
 }

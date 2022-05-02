@@ -6,7 +6,6 @@ import render.Window;
 import util.Time;
 
 public class EngineCore implements Runnable {
-
     private Thread loopthread;
     private boolean running = false;
     private boolean isRendered = false;
@@ -16,7 +15,6 @@ public class EngineCore implements Runnable {
     private static Window frame = new Window(EngineCore.width, EngineCore.height, "Game Engine");
     private Input input = new Input();
     private Game game;
-
 
     public EngineCore(Game game) {
         this.game = game;
@@ -69,7 +67,6 @@ public class EngineCore implements Runnable {
             }
             this.time.setPreviousTime(this.time.getCurrentTime());
         }
-
     }
 
     private void update() {
@@ -80,8 +77,9 @@ public class EngineCore implements Runnable {
     }
 
     private void render() throws InterruptedException {
-        this.frame.render();
+        clean();
         this.game.render();
+        this.frame.render();
     }
 
     private void clean() {

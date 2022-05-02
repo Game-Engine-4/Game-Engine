@@ -70,6 +70,14 @@ public class Vector2f {
         x = rx;
     }
 
+    public Vector2f rotate(float angle) {
+        double rad = Math.toRadians(angle);
+        double cos = Math.cos(rad);
+        double sin = Math.sin(rad);
+
+        return new Vector2f((float)(x * cos -y * sin),(float)(x * sin + y * cos));
+    }
+
     public Vector2f getRotatedBy(float angle) {
         float cos = Math.cos(angle);
         float sin = Math.sin(angle);
