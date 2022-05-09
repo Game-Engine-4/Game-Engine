@@ -2,11 +2,24 @@ package MeshShader;
 
 import org.lwjgl.BufferUtils;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+
 import Math.Matrix4x4;
 
 public class Util {
     public static FloatBuffer createFloatBuffer(int size){
         return BufferUtils.createFloatBuffer(size);
+    }
+
+    public static IntBuffer createIntBuffer(int size) {
+        return BufferUtils.createIntBuffer(size);
+    }
+
+    public static IntBuffer createFlippedBuffer(int[] val) {
+        IntBuffer buffer = createIntBuffer(val.length);
+        buffer.put(val);
+        buffer.flip();
+        return buffer;
     }
 
     public static FloatBuffer createFlippedBuffer(Vertex[] vertices){
