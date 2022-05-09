@@ -33,24 +33,34 @@ public class Vector2f {
         x = 0;
         y = 0;
     }
+    public static Vector2f setZero(Vector2f v) {
+        return new Vector2f(0,0);
+    }
 
     public float length() {
         return Math.sqrt(x * x + y * y);
     }
 
-    public float magnitude() {
+    public  float magnitude() {
         return Math.sqrt(x*x + y*y);
+    }
+
+
+    public static float magnitude(Vector2f v) {
+        return Math.sqrt(v.x*v.x + v.y*v.y);
     }
 
     public Vector2f normalize() {
         float magnitude = magnitude();
-
         if(magnitude != 0) {
             this.x /= magnitude;
             this.y /= magnitude;
         }
 
         return this;
+    }
+    public static Vector2f normalize(Vector2f v) {
+        return new Vector2f(v.x / (Math.sqrt(v.x*v.x + v.y*v.y)), Math.sqrt(v.x*v.x + v.y*v.y));
     }
 
     public Vector2f getNormalized() {
@@ -132,6 +142,9 @@ public class Vector2f {
 
         return this;
     }
+    public static Vector2f add(Vector2f v1, Vector2f v2) {
+        return new Vector2f(v1.x + v2.x, v1.y + v2.y);
+    }
 
     public Vector2f sub(float amount) {
         this.x -= amount;
@@ -153,6 +166,9 @@ public class Vector2f {
 
         return this;
     }
+    public static Vector2f sub(Vector2f v1, Vector2f v2) {
+        return new Vector2f(v1.x - v2.x, v1.y - v2.y);
+    }
 
     public Vector2f mul(float scalar) {
         this.x *= scalar;
@@ -167,6 +183,10 @@ public class Vector2f {
 
         return this;
     }
+    public static Vector2f mul(Vector2f v, float sc) {
+        return new Vector2f(v.x * sc, v.y * sc);
+    }
+
 
     public Vector2f div(float scalar) {
         this.x /= scalar;
@@ -182,9 +202,18 @@ public class Vector2f {
         return this;
     }
 
+    public static Vector2f div(Vector2f v, float sc) {
+        return new Vector2f(v.x / sc, v.y / sc);
+    }
     public float distance(Vector2f other) {
         float distX = this.x - other.x;
         float distY = this.y - other.y;
+
+        return (float)Math.sqrt(distX*distX + distY*distY);
+    }
+    public static float distance(Vector2f v1, Vector2f v2){
+        float distX = v1.x - v2.x;
+        float distY = v1.y - v2.y;
 
         return (float)Math.sqrt(distX*distX + distY*distY);
     }
@@ -206,6 +235,12 @@ public class Vector2f {
     public float distSquared(float x, float y) {
         float distX = this.x - x;
         float distY = this.y - y;
+
+        return distX*distX + distY*distY;
+    }
+    public static float distSquared(Vector2f v1, Vector2f v2){
+        float distX = v1.x - v2.x;
+        float distY = v1.y - v2.y;
 
         return distX*distX + distY*distY;
     }

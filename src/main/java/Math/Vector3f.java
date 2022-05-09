@@ -46,9 +46,6 @@ public class Vector3f {
         return new Vector3f(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
     }
 
-    public static Vector3f sub(Vector3f v2, Vector3f v1) {
-        return new Vector3f(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
-    }
 
     public Vector3f add(float dx, float dy, float dz) {
         this.x += dx;
@@ -70,6 +67,9 @@ public class Vector3f {
         this.y -= dy;
         this.z -= dz;
         return this;
+    }
+    public static Vector3f sub(Vector3f v2, Vector3f v1) {
+        return new Vector3f(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
     }
 
     public Vector3f mul(Vector3f v) {
