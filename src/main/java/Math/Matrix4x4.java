@@ -36,6 +36,7 @@ public class Matrix4x4 {
                 m30, m31, m32, m33);
     }
 
+
     /** Set the value of this 4x4matrix according to the specified matrix */
     public void set(Matrix4x4 matrix) {
         System.arraycopy(matrix.m, 0, m, 0, 16);
