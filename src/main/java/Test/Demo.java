@@ -65,8 +65,8 @@ public class Demo implements Game {
         float sinTemp = (float)Math.sin(temp);
 
         this.tr.setTranslation(sinTemp, 0, 0);
-        this.tr.setRotation(0, 0, sinTemp * 180);
-          this.tr.setScale(sinTemp, sinTemp, sinTemp);
+        this.tr.setRotation(0, sinTemp * 180, sinTemp * 180);
+          //this.tr.setScale(sinTemp, sinTemp, sinTemp);
     }
 
     @Override
