@@ -27,7 +27,7 @@ public class Demo implements Game {
         m = new Mesh();
         sh = new Shader();
 
-        Vertex[] vertices= (new Vertex[]{new Vertex(new Vector3f(-1, -1, 0)),
+        Vertex[] vertices = (new Vertex[]{new Vertex(new Vector3f(-1, -1, 0)),
                                    new Vertex(new Vector3f(0, 1, 0)),
                                    new Vertex(new Vector3f(1, -1, 0)),
         new Vertex(new Vector3f(0,-1,1))});
@@ -35,7 +35,7 @@ public class Demo implements Game {
                                     3,1,2,
                                     2,1,0,
                                     0,2,3};
-        m.addVertices(vertices,indices);
+        m.addVertices(vertices, indices);
 
         try {
             tr = new Transform();
@@ -66,7 +66,7 @@ public class Demo implements Game {
 
         this.tr.setTranslation(sinTemp, 0, 0);
         this.tr.setRotation(0, sinTemp * 180, sinTemp * 180);
-          //this.tr.setScale(sinTemp, sinTemp, sinTemp);
+        this.tr.setScale(sinTemp, sinTemp, sinTemp);
     }
 
     @Override

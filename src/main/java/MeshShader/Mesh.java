@@ -15,7 +15,7 @@ public class Mesh {
 
     public Mesh() {
         this.vbo = glGenBuffers();
-        this.ibo=glGenBuffers();
+        this.ibo = glGenBuffers();
         this.size = 0;
     }
 
@@ -24,7 +24,7 @@ public class Mesh {
 
         glBindBuffer(GL_ARRAY_BUFFER, this.vbo);
         glBufferData(GL_ARRAY_BUFFER, Util.createFlippedBuffer(vertices), GL_STATIC_DRAW);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ibo);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, Util.createFlippedBuffer(indices), GL_STATIC_DRAW);
     }
 
@@ -34,7 +34,7 @@ public class Mesh {
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glVertexAttribPointer(0, 3, GL_FLOAT, false, Vertex.SIZE * 4, 0);
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ibo);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
         glDrawElements(GL_TRIANGLES,size, GL_UNSIGNED_INT,0);
 
         glDisableVertexAttribArray(0);
