@@ -29,12 +29,19 @@ public class Quaternion {
 
         return this;
     }
-
+    public static Quaternion normalize(Quaternion q) {
+        float l = q.length();
+        return new Quaternion(q.x / l, q.y / l, q.z / l, q.w/l);
+    }
     public Quaternion conjugate() {
         return new Quaternion(x, -y, -z, -w);
     }
+    public static Quaternion conjugate(Quaternion q) {
+        return new Quaternion(q.x, -q.y, -q.z, -q.w);
+    }
 
-    public Quaternion mul(Quaternion a1, Quaternion a2) {
+
+    public static Quaternion mul(Quaternion a1, Quaternion a2) {
         // Components of the first quaternion.
         final float a11 = a1.getX();
         final float a12 = a1.getY();
