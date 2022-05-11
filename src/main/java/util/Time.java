@@ -1,38 +1,42 @@
 package util;
 
 public class Time {
+    private static double delta = 0.01f;
     final double fps = 60;
-    Double previousTime = (double) System.nanoTime();
-    Double currentTime =  (double) System.nanoTime();
-    Double deltaTime = 0.0;
-    public final Double GameRate = (Double) 1.0 / this.fps;
+    double previousTime = (double) System.nanoTime();
+    double currentTime =  (double) System.nanoTime();
+    double deltaTime = 0.0;
+    public final double GameRate = (double) 1.0 / this.fps;
 
-    public Double getCurrentTime() {
+    public double getCurrentTime() {
         return this.currentTime;
     }
 
-    public Double getPreviousTime() {
+    public double getPreviousTime() {
         return this.previousTime;
     }
 
-    public void setCurrentTime(Double currentTime) {
+    public void setCurrentTime(double currentTime) {
         this.currentTime = currentTime;
     }
 
-    public void setPreviousTime(Double previousTime) {
+    public void setPreviousTime(double previousTime) {
         this.previousTime = previousTime;
     }
 
-    public void setDeltaTime(Double deltaTime) {
+    public void setDeltaTime(double deltaTime) {
         this.deltaTime = deltaTime;
     }
 
-    public Double getDeltaTime() {
+    public double getDeltaTime() {
         return this.deltaTime;
     }
 
-    public Double calculateDeltaTime() {
-        return this.getCurrentTime() - this.getPreviousTime();
+    public static double getDelta() {
+        return delta;
     }
 
+    public double calculateDeltaTime() {
+        return this.getCurrentTime() - this.getPreviousTime();
+    }
 }
