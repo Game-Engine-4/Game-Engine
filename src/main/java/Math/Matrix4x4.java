@@ -1,159 +1,271 @@
 package Math;
 
-
 public class Matrix4x4 {
+    private float[][] m;
 
-    private float[]  m;  // of 16
-
-    /** Construct identity matrix. */
     public Matrix4x4() {
-        initialize();
-        setIdentity();
+        m = new float[4][4];
     }
 
-    /** Construct with the specified element values. */
-    public Matrix4x4(float[] m) {
-        initialize();
-        set (m);
-    }
-
-    /** Constrauct as a copy of the specified matrix.*/
-    public Matrix4x4(Matrix4x4 matrix) {
-        initialize();
-        set (matrix);
-    }
-
-    /** with specified values. */
-    public Matrix4x4 (float m00, float m01, float m02, float m03,
-                      float m10, float m11, float m12, float m13,
-                      float m20, float m21, float m22, float m23,
-                      float m30, float m31, float m32, float m33)
-    {
-        initialize();
-        set (m00, m01, m02, m03,
-                m10, m11, m12, m13,
-                m20, m21, m22, m23,
-                m30, m31, m32, m33);
+    public Matrix4x4(float[][] m) {
+        this.m = m;
     }
 
 
-    /** Set the value of this 4x4matrix according to the specified matrix */
-    public void set(Matrix4x4 matrix) {
-        System.arraycopy(matrix.m, 0, m, 0, 16);
+    public Matrix4x4 InitIdentity() {
+        m[0][0] = 1;
+        m[0][1] = 0;
+        m[0][2] = 0;
+        m[0][3] = 0;
+        m[1][0] = 0;
+        m[1][1] = 1;
+        m[1][2] = 0;
+        m[1][3] = 0;
+        m[2][0] = 0;
+        m[2][1] = 0;
+        m[2][2] = 1;
+        m[2][3] = 0;
+        m[3][0] = 0;
+        m[3][1] = 0;
+        m[3][2] = 0;
+        m[3][3] = 1;
+
+        return this;
     }
 
-    /** Set the values of this 4x4 matrix. Array of 16 matrix elements, m00, m01, etc. */
-    public void set(float[] ma) {
-        System.arraycopy(ma, 0, m, 0, 16);
+    public Matrix4x4 InitTranslation(float x, float y, float z) {
+        m[0][0] = 1;
+        m[0][1] = 0;
+        m[0][2] = 0;
+        m[0][3] = x;
+        m[1][0] = 0;
+        m[1][1] = 1;
+        m[1][2] = 0;
+        m[1][3] = y;
+        m[2][0] = 0;
+        m[2][1] = 0;
+        m[2][2] = 1;
+        m[2][3] = z;
+        m[3][0] = 0;
+        m[3][1] = 0;
+        m[3][2] = 0;
+        m[3][3] = 1;
+
+        return this;
     }
 
-    /** Set the values of this 4x4 matrix. */
-    public void set(float m00, float m01, float m02, float m03,
-                    float m10, float m11, float m12, float m13,
-                    float m20, float m21, float m22, float m23,
-                    float m30, float m31, float m32, float m33)
-    {
-        m[0]  = m00;
-        m[1]  = m01;
-        m[2]  = m02;
-        m[3]  = m03;
+    public Matrix4x4 InitRotation(float x, float y, float z) {
+        Matrix4x4 rx = new Matrix4x4();
+        Matrix4x4 ry = new Matrix4x4();
+        Matrix4x4 rz = new Matrix4x4();
 
-        m[4]  = m10;
-        m[5]  = m11;
-        m[6]  = m12;
-        m[7]  = m13;
+        x = (float) Math.toRadians(x);
+        y = (float) Math.toRadians(y);
+        z = (float) Math.toRadians(z);
 
-        m[8]  = m20;
-        m[9]  = m21;
-        m[10] = m22;
-        m[11] = m23;
+        rz.m[0][0] = (float) Math.cos(z);
+        rz.m[0][1] = -(float) Math.sin(z);
+        rz.m[0][2] = 0;
+        rz.m[0][3] = 0;
+        rz.m[1][0] = (float) Math.sin(z);
+        rz.m[1][1] = (float) Math.cos(z);
+        rz.m[1][2] = 0;
+        rz.m[1][3] = 0;
+        rz.m[2][0] = 0;
+        rz.m[2][1] = 0;
+        rz.m[2][2] = 1;
+        rz.m[2][3] = 0;
+        rz.m[3][0] = 0;
+        rz.m[3][1] = 0;
+        rz.m[3][2] = 0;
+        rz.m[3][3] = 1;
 
-        m[12] = m30;
-        m[13] = m31;
-        m[14] = m32;
-        m[15] = m33;
+        rx.m[0][0] = 1;
+        rx.m[0][1] = 0;
+        rx.m[0][2] = 0;
+        rx.m[0][3] = 0;
+        rx.m[1][0] = 0;
+        rx.m[1][1] = (float) Math.cos(x);
+        rx.m[1][2] = -(float) Math.sin(x);
+        rx.m[1][3] = 0;
+        rx.m[2][0] = 0;
+        rx.m[2][1] = (float) Math.sin(x);
+        rx.m[2][2] = (float) Math.cos(x);
+        rx.m[2][3] = 0;
+        rx.m[3][0] = 0;
+        rx.m[3][1] = 0;
+        rx.m[3][2] = 0;
+        rx.m[3][3] = 1;
+
+        ry.m[0][0] = (float) Math.cos(y);
+        ry.m[0][1] = 0;
+        ry.m[0][2] = -(float) Math.sin(y);
+        ry.m[0][3] = 0;
+        ry.m[1][0] = 0;
+        ry.m[1][1] = 1;
+        ry.m[1][2] = 0;
+        ry.m[1][3] = 0;
+        ry.m[2][0] = (float) Math.sin(y);
+        ry.m[2][1] = 0;
+        ry.m[2][2] = (float) Math.cos(y);
+        ry.m[2][3] = 0;
+        ry.m[3][0] = 0;
+        ry.m[3][1] = 0;
+        ry.m[3][2] = 0;
+        ry.m[3][3] = 1;
+
+        m = rz.Mul(ry.Mul(rx)).GetM();
+
+        return this;
     }
 
-    /** Return the values of this 4x4 matrix. */
-    public float[] get() {
-        return m;
+    public Matrix4x4 InitScale(float x, float y, float z) {
+        m[0][0] = x;
+        m[0][1] = 0;
+        m[0][2] = 0;
+        m[0][3] = 0;
+        m[1][0] = 0;
+        m[1][1] = y;
+        m[1][2] = 0;
+        m[1][3] = 0;
+        m[2][0] = 0;
+        m[2][1] = 0;
+        m[2][2] = z;
+        m[2][3] = 0;
+        m[3][0] = 0;
+        m[3][1] = 0;
+        m[3][2] = 0;
+        m[3][3] = 1;
+
+        return this;
     }
 
-    /** Initialize the matrix. */
-    private void initialize() {
-        m = new float[16];
+    public Matrix4x4 InitPerspective(float fov, float aspectRatio, float zNear, float zFar) {
+        float tanHalfFOV = (float) Math.tan(fov / 2);
+        float zRange = zNear - zFar;
+
+        m[0][0] = 1.0f / (tanHalfFOV * aspectRatio);
+        m[0][1] = 0;
+        m[0][2] = 0;
+        m[0][3] = 0;
+        m[1][0] = 0;
+        m[1][1] = 1.0f / tanHalfFOV;
+        m[1][2] = 0;
+        m[1][3] = 0;
+        m[2][0] = 0;
+        m[2][1] = 0;
+        m[2][2] = (-zNear - zFar) / zRange;
+        m[2][3] = 2 * zFar * zNear / zRange;
+        m[3][0] = 0;
+        m[3][1] = 0;
+        m[3][2] = 1;
+        m[3][3] = 0;
+
+
+        return this;
     }
 
-    public static Matrix4x4 identity() {
-        Matrix4x4 matrix = new Matrix4x4();
-        matrix.setIdentity();
-        return matrix;
+    public Matrix4x4 InitOrthographic(float left, float right, float bottom, float top, float near, float far) {
+        float width = right - left;
+        float height = top - bottom;
+        float depth = far - near;
+
+        m[0][0] = 2 / width;
+        m[0][1] = 0;
+        m[0][2] = 0;
+        m[0][3] = -(right + left) / width;
+        m[1][0] = 0;
+        m[1][1] = 2 / height;
+        m[1][2] = 0;
+        m[1][3] = -(top + bottom) / height;
+        m[2][0] = 0;
+        m[2][1] = 0;
+        m[2][2] = -2 / depth;
+        m[2][3] = -(far + near) / depth;
+        m[3][0] = 0;
+        m[3][1] = 0;
+        m[3][2] = 0;
+        m[3][3] = 1;
+
+        return this;
     }
 
-    /** Make an identity matrix out of this 4x4 matrix. */
-    public void setIdentity() {
-        for (int i=0; i<4; i++)
-            for (int j=0; j<4; j++)
-                m[i*4 + j] = (float) (i == j ? 1.0 : 0.0);
+    public Matrix4x4 InitRotation(Vector3f forward, Vector3f up) {
+        Vector3f f = forward.normalize();
+
+        Vector3f r = up.normalize();
+        r = r.cross(f);
+
+        Vector3f u = f.cross(r);
+
+        return InitRotation(f, u, r);
     }
 
-    /** Return matrix element [i,j]. */
-    public float getElement(int i, int j) {
-        return m[i*4 + j];
+    public Matrix4x4 InitRotation(Vector3f forward, Vector3f up, Vector3f right) {
+        Vector3f f = forward;
+        Vector3f r = right;
+        Vector3f u = up;
+
+        m[0][0] = r.getX();
+        m[0][1] = r.getY();
+        m[0][2] = r.getZ();
+        m[0][3] = 0;
+        m[1][0] = u.getX();
+        m[1][1] = u.getY();
+        m[1][2] = u.getZ();
+        m[1][3] = 0;
+        m[2][0] = f.getX();
+        m[2][1] = f.getY();
+        m[2][2] = f.getZ();
+        m[2][3] = 0;
+        m[3][0] = 0;
+        m[3][1] = 0;
+        m[3][2] = 0;
+        m[3][3] = 1;
+
+        return this;
     }
 
-    /** Set specified matrix element. */
-    public void setElement(int i, int j, float value) {
-        m[i*4 + j] = value;
+    public Vector3f Transform(Vector3f r) {
+        return new Vector3f(m[0][0] * r.getX() + m[0][1] * r.getY() + m[0][2] * r.getZ() + m[0][3],
+                m[1][0] * r.getX() + m[1][1] * r.getY() + m[1][2] * r.getZ() + m[1][3],
+                m[2][0] * r.getX() + m[2][1] * r.getY() + m[2][2] * r.getZ() + m[2][3]);
     }
 
-    /** Add the specified 4x4 matrix to this matrix. */
-    public void add(Matrix4x4 matrix) {
-        for (int i=0; i<4; i++)
-            for (int j=0; j<4; j++)
-                m[i*4 + j] += matrix.m[i*4 + j];
-    }
+    public Matrix4x4 Mul(Matrix4x4 r) {
+        Matrix4x4 res = new Matrix4x4();
 
-    /** Add two matrices and return the result matrix. */
-    public static Matrix4x4 add(Matrix4x4 m1, Matrix4x4 m2) {
-        Matrix4x4 m = new Matrix4x4 (m1);
-        m.add (m2);
-        return m;
-    }
-
-    /** Multiply matrix with the specified matrix */
-    public void multiply(Matrix4x4 matrix) {
-        Matrix4x4 product = new Matrix4x4();
-
-        for (int i = 0; i < 16; i += 4) {
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                product.m[i + j] = 0.0F;
-                for (int k = 0; k < 4; k++)
-                    product.m[i + j] += m[i + k] * matrix.m[k*4 + j];
+                res.Set(i, j, m[i][0] * r.Get(0, j) +
+                        m[i][1] * r.Get(1, j) +
+                        m[i][2] * r.Get(2, j) +
+                        m[i][3] * r.Get(3, j));
             }
         }
 
-        set (product);
+        return res;
     }
 
-    /** Multiply two matrices and return the result matrix. */
-    public static Matrix4x4 multiply(Matrix4x4 m1, Matrix4x4 m2) {
-        Matrix4x4 m = new Matrix4x4 (m1);
-        m.multiply (m2);
-        return m;
+    public float[][] GetM() {
+        float[][] res = new float[4][4];
+
+        for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 4; j++)
+                res[i][j] = m[i][j];
+
+        return res;
     }
 
-    /** Create a string representation of this matrix. String representing this matrix. */
-    public String toString()
-    {
-        StringBuilder string = new StringBuilder("");
+    public float Get(int x, int y) {
+        return m[x][y];
+    }
 
-        for (int i=0; i<4; i++) {
-            for (int j=0; j<4; j++)
-                string.append(getElement(i, j)).append(" ");
-            string.append('\n');
-        }
+    public void SetM(float[][] m) {
+        this.m = m;
+    }
 
-        return string.toString();
+    public void Set(int x, int y, float value) {
+        m[x][y] = value;
     }
 }

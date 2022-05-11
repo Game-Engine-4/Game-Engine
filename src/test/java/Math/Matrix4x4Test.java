@@ -8,28 +8,56 @@ import static org.junit.Assert.assertEquals;
 class Matrix4x4Test {
     Matrix4x4 matrix1;
     Matrix4x4 matrix2;
+
     @BeforeEach
-    void init(){
-        matrix1 = new Matrix4x4(0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2);
-        matrix2 = new Matrix4x4(0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1);
+    void init() {
+        matrix1 = new Matrix4x4(new float[][]{
+                {1, 0, 1, 0},
+                {1, 0, 1, 0},
+                {1, 0, 1, 0},
+                {1, 0, 1, 0}
+        });
+        matrix2 = new Matrix4x4(new float[][]{
+                {2, 0, 2, 0},
+                {2, 0, 2, 0},
+                {2, 0, 2, 0},
+                {2, 0, 2, 0}
+        });
     }
 
     @Test
-    void testSetIdentity() {
-        Matrix4x4 matrix3 = new Matrix4x4(1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,01);
-        matrix1.setIdentity();
+    void testInitIdentity() {
+        Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
+                {1, 0, 0, 0},
+                {0, 1, 0, 0},
+                {0, 0, 1, 0},
+                {0, 0, 0, 1}
+        });
+        matrix1.InitIdentity();
         assertEquals(matrix3, matrix1);
     }
 
     @Test
-    void testAdd() {
-        Matrix4x4 matrix3 = new Matrix4x4(0,3,0,3,0,3,0,3,0,3,0,3,0,3,0,3);
-        assertEquals(matrix3, Matrix4x4.add(matrix1,matrix2));
+    void testInitTranslation() {
+        Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
+                {1, 0, 0, 0},
+                {0, 1, 0, 0},
+                {0, 0, 1, 0},
+                {0, 0, 0, 1}
+        });
+        matrix1.InitTranslation(0, 0, 0);
+        assertEquals(matrix3, matrix1);
     }
 
     @Test
-    void testMultiply() {
-        Matrix4x4 matrix3 = new Matrix4x4(0,4,0,4,0,4,0,4,0,4,0,4,0,4,0,4);
-        assertEquals(matrix3, Matrix4x4.multiply(matrix1, matrix2));
+    void testInitScale() {
+        Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
+                {1, 0, 0, 0},
+                {0, 1, 0, 0},
+                {0, 0, 1, 0},
+                {0, 0, 0, 1}
+        });
+        matrix1.InitScale(1, 1, 1);
+        assertEquals(matrix3, matrix1);
     }
 }
