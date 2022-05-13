@@ -1,16 +1,18 @@
 package Test;
 
+import MeshShader.*;
 import main.Game;
 import Inputs.Input;
-import MeshShader.Mesh;
-import MeshShader.Shader;
-import MeshShader.Vertex;
 import util.Time;
 import util.Utils;
 import Math.Vector3f;
 import Math.Transform;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
 
 import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
 import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
@@ -24,18 +26,12 @@ public class Demo implements Game {
     }
 
     public void init() {
+
         m = new Mesh();
         sh = new Shader();
 
-        Vertex[] vertices = (new Vertex[]{new Vertex(new Vector3f(-1, -1, 0)),
-                                   new Vertex(new Vector3f(0, 1, 0)),
-                                   new Vertex(new Vector3f(1, -1, 0)),
-        new Vertex(new Vector3f(0,-1,1))});
-        int[] indices = new int[] {0,1,3,
-                                    3,1,2,
-                                    2,1,0,
-                                    0,2,3};
-        m.addVertices(vertices, indices);
+        MeshLoader myLoader = new MeshLoaderObj();
+        m= myLoader.loadMesh("res/Cube.obj");
 
         try {
             tr = new Transform();
@@ -49,6 +45,8 @@ public class Demo implements Game {
 
         sh.addUniform("transform");
     }
+
+
 
     public void input() {
     }
@@ -64,7 +62,7 @@ public class Demo implements Game {
 
         float sinTemp = (float)Math.sin(temp);
 
-        this.tr.setTranslation(sinTemp, 0, 0);
+       // this.tr.setTranslation(sinTemp, 0, 0);
         this.tr.setRotation(0, sinTemp * 180, sinTemp * 180);
         this.tr.setScale(sinTemp, sinTemp, sinTemp);
     }
