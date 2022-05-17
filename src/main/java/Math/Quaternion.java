@@ -14,6 +14,7 @@ public class Quaternion {
         this.w = w;
     }
 
+
     public float length() {
         return (float) Math.sqrt(x * x + y * y + z * z + w * w);
     }
@@ -32,7 +33,7 @@ public class Quaternion {
 
     public static Quaternion normalize(Quaternion q) {
         float l = q.length();
-        return new Quaternion(q.x / l, q.y / l, q.z / l, q.w/l);
+        return new Quaternion(q.x / l, q.y / l, q.z / l, q.w / l);
     }
 
     public Quaternion conjugate() {
@@ -67,9 +68,9 @@ public class Quaternion {
 
     public Quaternion mul(Vector3f r) {
         float W = -x * r.getX() - y * r.getY() - z * r.getZ();
-        float X =  w * r.getX() + y * r.getZ() - z * r.getY();
-        float Y =  w * r.getY() + z * r.getX() - x * r.getZ();
-        float Z =  w * r.getZ() + x * r.getY() - y * r.getX();
+        float X = w * r.getX() + y * r.getZ() - z * r.getY();
+        float Y = w * r.getY() + z * r.getX() - x * r.getZ();
+        float Z = w * r.getZ() + x * r.getY() - y * r.getX();
 
         return new Quaternion(X, Y, Z, W);
     }

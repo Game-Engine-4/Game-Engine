@@ -6,7 +6,9 @@ public class Vector2f {
     public float x;
     public float y;
 
-    /** Contructs vector with x&y component of zero. */
+    /**
+     * Contructs vector with x&y component of zero.
+     */
     public Vector2f() {
     }
 
@@ -35,24 +37,24 @@ public class Vector2f {
     }
 
     public static Vector2f setZero(Vector2f v) {
-        return new Vector2f(0,0);
+        return new Vector2f(0, 0);
     }
 
     public float length() {
         return Math.sqrt(x * x + y * y);
     }
 
-    public  float magnitude() {
-        return Math.sqrt(x*x + y*y);
+    public float magnitude() {
+        return Math.sqrt(x * x + y * y);
     }
 
     public static float magnitude(Vector2f v) {
-        return Math.sqrt(v.x*v.x + v.y*v.y);
+        return Math.sqrt(v.x * v.x + v.y * v.y);
     }
 
     public Vector2f normalize() {
         float magnitude = magnitude();
-        if(magnitude != 0) {
+        if (magnitude != 0) {
             this.x /= magnitude;
             this.y /= magnitude;
         }
@@ -61,7 +63,7 @@ public class Vector2f {
     }
 
     public static Vector2f normalize(Vector2f v) {
-        return new Vector2f(v.x / (Math.sqrt(v.x*v.x + v.y*v.y)), v.y / Math.sqrt(v.x*v.x + v.y*v.y));
+        return new Vector2f(v.x / (Math.sqrt(v.x * v.x + v.y * v.y)), v.y / Math.sqrt(v.x * v.x + v.y * v.y));
     }
 
     public Vector2f getNormalized() {
@@ -86,7 +88,7 @@ public class Vector2f {
         double cos = Math.cos(rad);
         double sin = Math.sin(rad);
 
-        return new Vector2f((float)(x * cos -y * sin),(float)(x * sin + y * cos));
+        return new Vector2f((float) (x * cos - y * sin), (float) (x * sin + y * cos));
     }
 
     public Vector2f getRotatedBy(float angle) {
@@ -176,6 +178,7 @@ public class Vector2f {
 
         return this;
     }
+
     public static Vector2f sub(Vector2f v1, Vector2f v2) {
         return new Vector2f(v1.x - v2.x, v1.y - v2.y);
     }
@@ -220,49 +223,49 @@ public class Vector2f {
         float distX = this.x - other.x;
         float distY = this.y - other.y;
 
-        return (float)Math.sqrt(distX*distX + distY*distY);
+        return (float) Math.sqrt(distX * distX + distY * distY);
     }
 
-    public static float distance(Vector2f v1, Vector2f v2){
+    public static float distance(Vector2f v1, Vector2f v2) {
         float distX = v1.x - v2.x;
         float distY = v1.y - v2.y;
 
-        return (float)Math.sqrt(distX*distX + distY*distY);
+        return (float) Math.sqrt(distX * distX + distY * distY);
     }
 
     public float distance(float x, float y) {
         float distX = this.x - x;
         float distY = this.y - y;
 
-        return (float)Math.sqrt(distX*distX + distY*distY);
+        return (float) Math.sqrt(distX * distX + distY * distY);
     }
 
     public float distSquared(Vector2f other) {
         float distX = this.x - other.x;
         float distY = this.y - other.y;
 
-        return distX*distX + distY*distY;
+        return distX * distX + distY * distY;
     }
 
     public float distSquared(float x, float y) {
         float distX = this.x - x;
         float distY = this.y - y;
 
-        return distX*distX + distY*distY;
+        return distX * distX + distY * distY;
     }
 
-    public static float distSquared(Vector2f v1, Vector2f v2){
+    public static float distSquared(Vector2f v1, Vector2f v2) {
         float distX = v1.x - v2.x;
         float distY = v1.y - v2.y;
 
-        return distX*distX + distY*distY;
+        return distX * distX + distY * distY;
     }
 
     @Override
     public boolean equals(Object v) {
         float epsilon = 0.00001f;
-        if(v instanceof Vector2f) {
-            return Math.abs(this.x - ((Vector2f) v).x)<epsilon && Math.abs(this.y - ((Vector2f) v).y)<epsilon;
+        if (v instanceof Vector2f) {
+            return Math.abs(this.x - ((Vector2f) v).x) < epsilon && Math.abs(this.y - ((Vector2f) v).y) < epsilon;
         }
         return false;
     }

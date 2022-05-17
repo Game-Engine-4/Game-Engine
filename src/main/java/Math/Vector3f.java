@@ -148,7 +148,7 @@ public class Vector3f {
     }
 
     public static Vector3f setZero(Vector3f v) {
-        return new Vector3f(0,0,0);
+        return new Vector3f(0, 0, 0);
     }
 
     public Vector3f set(Vector3f v) {
@@ -177,7 +177,7 @@ public class Vector3f {
     }
 
     public static float lengthSquared(Vector3f v) {
-        return  (v.x * v.x + v.y * v.y + v.z * v.z);
+        return (v.x * v.x + v.y * v.y + v.z * v.z);
     }
 
     public float length() {
@@ -267,15 +267,17 @@ public class Vector3f {
         dest.z = this.z;
         return dest;
     }
-@Override
+
+    @Override
     public boolean equals(Object v) {
         float epsilon = 0.00001f;
-        if(v instanceof Vector3f) {
-            return Math.abs(this.x - ((Vector3f) v).x)<epsilon && Math.abs(this.y - ((Vector3f) v).y)<epsilon
-                    && Math.abs(this.z - ((Vector3f) v).z)<epsilon;
+        if (v instanceof Vector3f) {
+            return Math.abs(this.x - ((Vector3f) v).x) < epsilon && Math.abs(this.y - ((Vector3f) v).y) < epsilon
+                    && Math.abs(this.z - ((Vector3f) v).z) < epsilon;
         }
         return false;
     }
+
     public float getX() {
         return x;
     }
