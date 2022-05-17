@@ -6,10 +6,10 @@ public class Matrix4x4 {
     public Matrix4x4() {
         m = new float[4][4];
     }
+
     public Matrix4x4(float[][] m) {
         this.m = m;
     }
-
 
     public Matrix4x4 InitIdentity() {
         m[0][0] = 1;	m[0][1] = 0;	m[0][2] = 0;	m[0][3] = 0;
@@ -140,6 +140,23 @@ public class Matrix4x4 {
         return res;
     }
 
+    public boolean equals(Object obj){
+        float epsilon = 0.000001f;
+        if(obj instanceof Matrix4x4){
+            for(int i=0;i<4;i++){
+                for(int j=0;j<4;j++){
+                    if(Math.abs(this.Get(i,j)-((Matrix4x4) obj).Get(i,j))>epsilon){
+                        if(!((((Matrix4x4) obj).Get(i,j)==-0f&&this.Get(i,j)==0f)||((Matrix4x4) obj).Get(i,j)==0f&&this.Get(i,j)==-0f)){
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     public float[][] GetM() {
         float[][] res = new float[4][4];
 
@@ -161,4 +178,5 @@ public class Matrix4x4 {
     public void Set(int x, int y, float value) {
         m[x][y] = value;
     }
+
 }

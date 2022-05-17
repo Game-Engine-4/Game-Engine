@@ -33,6 +33,7 @@ public class Vector2f {
         x = 0;
         y = 0;
     }
+
     public static Vector2f setZero(Vector2f v) {
         return new Vector2f(0,0);
     }
@@ -44,7 +45,6 @@ public class Vector2f {
     public  float magnitude() {
         return Math.sqrt(x*x + y*y);
     }
-
 
     public static float magnitude(Vector2f v) {
         return Math.sqrt(v.x*v.x + v.y*v.y);
@@ -59,6 +59,7 @@ public class Vector2f {
 
         return this;
     }
+
     public static Vector2f normalize(Vector2f v) {
         return new Vector2f(v.x / (Math.sqrt(v.x*v.x + v.y*v.y)), Math.sqrt(v.x*v.x + v.y*v.y));
     }
@@ -150,6 +151,7 @@ public class Vector2f {
 
         return this;
     }
+
     public static Vector2f add(Vector2f v1, Vector2f v2) {
         return new Vector2f(v1.x + v2.x, v1.y + v2.y);
     }
@@ -191,10 +193,10 @@ public class Vector2f {
 
         return this;
     }
+
     public static Vector2f mul(Vector2f v, float sc) {
         return new Vector2f(v.x * sc, v.y * sc);
     }
-
 
     public Vector2f div(float scalar) {
         this.x /= scalar;
@@ -213,12 +215,14 @@ public class Vector2f {
     public static Vector2f div(Vector2f v, float sc) {
         return new Vector2f(v.x / sc, v.y / sc);
     }
+
     public float distance(Vector2f other) {
         float distX = this.x - other.x;
         float distY = this.y - other.y;
 
         return (float)Math.sqrt(distX*distX + distY*distY);
     }
+
     public static float distance(Vector2f v1, Vector2f v2){
         float distX = v1.x - v2.x;
         float distY = v1.y - v2.y;
@@ -246,6 +250,7 @@ public class Vector2f {
 
         return distX*distX + distY*distY;
     }
+
     public static float distSquared(Vector2f v1, Vector2f v2){
         float distX = v1.x - v2.x;
         float distY = v1.y - v2.y;
@@ -253,7 +258,12 @@ public class Vector2f {
         return distX*distX + distY*distY;
     }
 
+    public boolean equals(Vector2f r) {
+        return this.x == r.x && this.y == r.y;
+    }
+
     public String toString() {
         return "(" + x + ", " + y + ")";
     }
+
 }

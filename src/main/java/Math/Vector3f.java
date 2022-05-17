@@ -46,7 +46,6 @@ public class Vector3f {
         return new Vector3f(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
     }
 
-
     public Vector3f add(float dx, float dy, float dz) {
         this.x += dx;
         this.y += dy;
@@ -68,6 +67,7 @@ public class Vector3f {
         this.z -= dz;
         return this;
     }
+
     public static Vector3f sub(Vector3f v2, Vector3f v1) {
         return new Vector3f(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
     }
@@ -103,10 +103,10 @@ public class Vector3f {
         dest.z = z / v.z;
         return dest;
     }
+
     public static Vector3f div(Vector3f v, float sc) {
         return new Vector3f(v.x / sc, v.y / sc, v.z / sc);
     }
-
 
     public float dot(Vector3f v) {
         return this.x * v.x + this.y * v.y + this.z * v.z;
@@ -125,6 +125,7 @@ public class Vector3f {
         }
         return this;
     }
+
     public static Vector3f normalize(Vector3f v) {
         float l = v.length();
         return new Vector3f(v.x / l, v.y / l, v.z / l);
@@ -145,6 +146,7 @@ public class Vector3f {
         this.z = 0;
         return this;
     }
+
     public static Vector3f setZero(Vector3f v) {
         return new Vector3f(0,0,0);
     }
@@ -173,6 +175,7 @@ public class Vector3f {
     public float lengthSquared() {
         return (this.x * this.x + this.y * this.y + this.z * this.z);
     }
+
     public static Vector3f lengthSquared(Vector3f v) {
         return new Vector3f(v.x * v.x, v.y * v.y, v.z * v.z);
     }
@@ -265,6 +268,10 @@ public class Vector3f {
         return dest;
     }
 
+    public boolean equals(Vector3f r) {
+        return this.x == r.getX() && this.y == r.getY() && this.z == r.getZ();
+    }
+
     public float getX() {
         return x;
     }
@@ -278,5 +285,3 @@ public class Vector3f {
     }
 
 }
-
-
