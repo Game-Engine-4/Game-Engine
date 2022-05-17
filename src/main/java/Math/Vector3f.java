@@ -68,7 +68,7 @@ public class Vector3f {
         return this;
     }
 
-    public static Vector3f sub(Vector3f v2, Vector3f v1) {
+    public static Vector3f sub(Vector3f v1, Vector3f v2) {
         return new Vector3f(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
     }
 
@@ -112,8 +112,8 @@ public class Vector3f {
         return this.x * v.x + this.y * v.y + this.z * v.z;
     }
 
-    public static Vector3f dot(Vector3f v2, Vector3f v1) {
-        return new Vector3f(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
+    public static float dot(Vector3f v2, Vector3f v1) {
+        return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
     }
 
     public Vector3f normalize() {
@@ -176,8 +176,8 @@ public class Vector3f {
         return (this.x * this.x + this.y * this.y + this.z * this.z);
     }
 
-    public static Vector3f lengthSquared(Vector3f v) {
-        return new Vector3f(v.x * v.x, v.y * v.y, v.z * v.z);
+    public static float lengthSquared(Vector3f v) {
+        return  (v.x * v.x + v.y * v.y + v.z * v.z);
     }
 
     public float length() {
@@ -267,11 +267,15 @@ public class Vector3f {
         dest.z = this.z;
         return dest;
     }
-
-    public boolean equals(Vector3f r) {
-        return this.x == r.getX() && this.y == r.getY() && this.z == r.getZ();
+@Override
+    public boolean equals(Object v) {
+        float epsilon = 0.00001f;
+        if(v instanceof Vector3f) {
+            return Math.abs(this.x - ((Vector3f) v).x)<epsilon && Math.abs(this.y - ((Vector3f) v).y)<epsilon
+                    && Math.abs(this.z - ((Vector3f) v).z)<epsilon;
+        }
+        return false;
     }
-
     public float getX() {
         return x;
     }

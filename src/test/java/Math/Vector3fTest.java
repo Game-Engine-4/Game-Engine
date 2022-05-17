@@ -4,19 +4,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class Vector3fTest {
     Vector3f v1;
     Vector3f v2;
+    Vector3f v3;
 
     @BeforeEach
     void init() {
         v1 = new Vector3f(1, 2, 3);
         v2 = new Vector3f(2, 4, 6);
-    }
-
-    @Test
-    void distance() {
+        v3 = new Vector3f(2, 4, 4);
     }
 
     @Test
@@ -27,7 +26,7 @@ class Vector3fTest {
     @Test
     void failedTestAdd() {
         Vector3f v3 = new Vector3f(3, 5, 9);
-        assertEquals(v3, Vector3f.add(v1, v2));
+        assertNotEquals(v3, Vector3f.add(v1, v2));
     }
 
     @Test
@@ -39,7 +38,7 @@ class Vector3fTest {
     @Test
     void failedTestSub() {
         Vector3f v3 = new Vector3f(0, 1, 2);
-        assertEquals(v3, Vector3f.sub(v2, v1));
+        assertNotEquals(v3, Vector3f.sub(v2, v1));
     }
 
     @Test
@@ -51,7 +50,7 @@ class Vector3fTest {
     @Test
     void failedTestMul() {
         Vector3f v3 = new Vector3f(2, 4, 9);
-        assertEquals(v3, Vector3f.mul(v1, 2));
+        assertNotEquals(v3, Vector3f.mul(v1, 2));
     }
 
     @Test
@@ -62,58 +61,54 @@ class Vector3fTest {
     @Test
     void failedTestDiv() {
         Vector3f v3 = new Vector3f( 2, 4, 3);
-        assertEquals(v3, Vector3f.div(v2, 2));
+        assertNotEquals(v3, Vector3f.div(v2, 2));
     }
 
     @Test
     void testDot(){
-        Vector3f v3 = new Vector3f(2, 8, 18);
-        assertEquals(v3, Vector3f.dot(v1,v2));
+        assertEquals(28f, Vector3f.dot(v1,v2));
     }
     @Test
     void failedTestDot(){
-        Vector3f v3 = new Vector3f(3f, 5f, 15f);
-        assertEquals(v3, Vector3f.dot(v1,v2));
+        assertNotEquals(33f, Vector3f.dot(v1,v2));
     }
     @Test
     void testNormalize() {
-        Vector3f v3 = new Vector3f(1/3f, 2/3f, 1);
-        assertEquals(v3, Vector3f.normalize(v1));
+        Vector3f v4 = new Vector3f(2/6f, 4/6f, 4/6f);
+        assertEquals(v4, Vector3f.normalize(v3));
     }
     @Test
     void failedTestNormalize() {
-        Vector3f v3 = new Vector3f(1/3, 2/3, 1/5);
-        assertEquals(v3, Vector3f.normalize(v1));
+        Vector3f v4 = new Vector3f(1/6f, 3/6f, 4/6f);
+        assertNotEquals(v4, Vector3f.normalize(v3));
     }
     @Test
     void testSetZero() {
-        Vector3f v3 = new Vector3f(0,0,0);
+        Vector3f v3 = new Vector3f(0f,0f,0f);
         assertEquals(v3, Vector3f.setZero(v1));
     }
     @Test
     void failedTestSetZero() {
         Vector3f v3 = new Vector3f(0,1,0);
-        assertEquals(v3, Vector3f.setZero(v1));
+        assertNotEquals(v3, Vector3f.setZero(v1));
     }
     @Test
     void testLengthSquared() {
-        Vector3f v3 = new Vector3f(1, 4, 9);
-        assertEquals(v3, Vector3f.lengthSquared(v1));
+        assertEquals(14f, Vector3f.lengthSquared(v1));
     }
     @Test
     void failedTestLengthSquared() {
         Vector3f v3 = new Vector3f(1, 5, 9);
-        assertEquals(v3, Vector3f.lengthSquared(v1));
+        assertNotEquals(v3, Vector3f.lengthSquared(v1));
     }
     @Test
     void testLength(){
-        float l = 3;
-        assertEquals(l, v1.length());
+        assertEquals(6f, v3.length());
     }
     @Test
     void failedTestLength(){
         float l = 2;
-        assertEquals(l, v1.length());
+        assertNotEquals(l, v1.length());
     }
     @Test
     void testCross() {
@@ -123,7 +118,7 @@ class Vector3fTest {
     @Test
     void failedTestCross() {
         Vector3f v3 = new Vector3f(1, 1, 0);
-        assertEquals(v3, Vector3f.cross(v1, v2));
+        assertNotEquals(v3, Vector3f.cross(v1, v2));
     }
 
 }
