@@ -39,8 +39,7 @@ class Vector2fTest {
 
     @Test
     void failedTestLength() {
-        float l = 3;
-        assertNotEquals(l, v1.length());
+        assertNotEquals(8f, v1.length());
     }
 
     @Test
