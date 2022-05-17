@@ -9,13 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class Vector2fTest {
     Vector2f v1;
     Vector2f v2;
-    Vector2f v3;
+
 
     @BeforeEach
     void init() {
         v1 = new Vector2f(1, 2);
         v2 = new Vector2f(2, 4);
-        v3 = new Vector2f(6, 8);
 
     }
 
@@ -34,7 +33,7 @@ class Vector2fTest {
 
     @Test
     void testLength() {
-        assertEquals(10f, v3.length());
+        assertEquals((float) Math.sqrt(5), v1.length());
     }
 
     @Test
@@ -44,7 +43,7 @@ class Vector2fTest {
 
     @Test
     void testMagnitude() {
-        assertEquals(10f, Vector2f.magnitude(v3));
+        assertEquals((float) Math.sqrt(20), Vector2f.magnitude(v2));
     }
 
     @Test
