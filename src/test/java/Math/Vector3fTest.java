@@ -9,13 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 class Vector3fTest {
     Vector3f v1;
     Vector3f v2;
-    Vector3f v3;
 
     @BeforeEach
     void init() {
         v1 = new Vector3f(1, 2, 3);
         v2 = new Vector3f(2, 4, 6);
-        v3 = new Vector3f(2, 4, 4);
     }
 
     @Test
@@ -80,14 +78,14 @@ class Vector3fTest {
 
     @Test
     void testNormalize() {
-        Vector3f v4 = new Vector3f(2 / 6f, 4 / 6f, 4 / 6f);
-        assertEquals(v4, Vector3f.normalize(v3));
+        Vector3f v3 = new Vector3f(2 / 6f, 4 / 6f, 4 / 6f);
+        assertEquals(v3, Vector3f.normalize(v3));
     }
 
     @Test
     void failedTestNormalize() {
-        Vector3f v4 = new Vector3f(1 / 6f, 3 / 6f, 4 / 6f);
-        assertNotEquals(v4, Vector3f.normalize(v3));
+        Vector3f v3 = new Vector3f(1 / 6f, 3 / 6f, 4 / 6f);
+        assertNotEquals(v3, Vector3f.normalize(v3));
     }
 
     @Test
@@ -114,13 +112,12 @@ class Vector3fTest {
 
     @Test
     void testLength() {
-        assertEquals(6f, v3.length());
+        assertEquals((float) Math.sqrt(14), v1.length());
     }
 
     @Test
     void failedTestLength() {
-        float l = 2;
-        assertNotEquals(l, v1.length());
+        assertNotEquals((float) Math.sqrt(13), v1.length());
     }
 
     @Test
