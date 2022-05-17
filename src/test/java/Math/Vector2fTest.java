@@ -61,7 +61,7 @@ class Vector2fTest {
 
     @Test
     void failedTestNormalize() {
-        Vector2f v3 = new Vector2f(1 / 3, 1 / 3);
+        Vector2f v3 = new Vector2f(1 / 3f, 1 / 3f);
         assertNotEquals(v3, Vector2f.normalize(v1));
     }
 
@@ -82,8 +82,7 @@ class Vector2fTest {
 
     @Test
     void failedTestCross() {
-        Vector2f v3 = new Vector2f(0, 1);
-        assertNotEquals(v3, Vector2f.cross(v1, v2));
+        assertNotEquals(1f, Vector2f.cross(v1, v2));
     }
 
     @Test
