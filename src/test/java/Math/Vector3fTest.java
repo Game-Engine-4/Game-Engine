@@ -109,8 +109,7 @@ class Vector3fTest {
 
     @Test
     void failedTestLengthSquared() {
-        Vector3f v3 = new Vector3f(1, 5, 9);
-        assertNotEquals(v3, Vector3f.lengthSquared(v1));
+        assertNotEquals(15f, Vector3f.lengthSquared(v1));
     }
 
     @Test
