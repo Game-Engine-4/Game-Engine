@@ -61,7 +61,7 @@ public class Vector2f {
     }
 
     public static Vector2f normalize(Vector2f v) {
-        return new Vector2f(v.x / (Math.sqrt(v.x*v.x + v.y*v.y)), Math.sqrt(v.x*v.x + v.y*v.y));
+        return new Vector2f(v.x / (Math.sqrt(v.x*v.x + v.y*v.y)), v.y / Math.sqrt(v.x*v.x + v.y*v.y));
     }
 
     public Vector2f getNormalized() {
@@ -258,8 +258,13 @@ public class Vector2f {
         return distX*distX + distY*distY;
     }
 
-    public boolean equals(Vector2f r) {
-        return this.x == r.x && this.y == r.y;
+    @Override
+    public boolean equals(Object v) {
+        float epsilon = 0.00001f;
+        if(v instanceof Vector2f) {
+            return Math.abs(this.x - ((Vector2f) v).x)<epsilon && Math.abs(this.y - ((Vector2f) v).y)<epsilon;
+        }
+        return false;
     }
 
     public String toString() {
