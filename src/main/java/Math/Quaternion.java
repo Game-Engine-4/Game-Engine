@@ -75,8 +75,13 @@ public class Quaternion {
         return new Quaternion(X, Y, Z, W);
     }
 
-    public boolean equals(Quaternion r) {
-        return x == r.getX() && y == r.getY() && z == r.getZ() && w == r.getW();
+    public boolean equals(Object v) {
+        float epsilon = 0.0001f;
+        if (v instanceof Quaternion) {
+            return Math.abs(this.x - ((Quaternion) v).x) < epsilon && Math.abs(this.y - ((Quaternion) v).y) < epsilon
+                    && Math.abs(this.z - ((Quaternion) v).z) < epsilon && Math.abs(this.w - ((Quaternion) v).w) < epsilon;
+        }
+        return false;
     }
 
     public float getX() {
