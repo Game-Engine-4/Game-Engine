@@ -1,14 +1,14 @@
 package MeshShader;
 
+
+
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import Math.Vector3f;
-public class MeshLoaderObj implements MeshLoader {
+public class OBJMeshLoader implements MeshLoader {
 
 
     @Override
