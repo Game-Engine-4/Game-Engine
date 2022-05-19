@@ -58,7 +58,7 @@ public class OBJMeshLoader implements MeshLoader {
             objMesh.addVertices(objVertices,indicesData);
             return objMesh;
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Couldn't read from obj file");
             throw e;
         }

@@ -39,11 +39,7 @@ public class EngineCore implements Runnable {
     @Override
     public void run() {
         frame.init();
-        try {
-            game.init();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        game.init();
         this.time.setPreviousTime((double) System.nanoTime());
         float DeltaTime = 0;
         while (this.running) {
