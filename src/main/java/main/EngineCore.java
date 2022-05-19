@@ -5,6 +5,8 @@ import Test.Demo;
 import render.Window;
 import util.Time;
 
+import java.io.IOException;
+
 public class EngineCore implements Runnable {
     private Thread loopthread;
     private boolean running = false;
@@ -37,7 +39,11 @@ public class EngineCore implements Runnable {
     @Override
     public void run() {
         frame.init();
-        game.init();
+        try {
+            game.init();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.time.setPreviousTime((double) System.nanoTime());
         float DeltaTime = 0;
         while (this.running) {
