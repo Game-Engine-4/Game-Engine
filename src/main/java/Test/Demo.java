@@ -30,7 +30,7 @@ public class Demo implements Game {
         m = new Mesh();
         sh = new Shader();
 
-        MeshLoader myLoader = new MeshLoaderObj();
+        MeshLoader myLoader = new OBJMeshLoader();
         m= myLoader.loadMesh("res/Cube.obj");
 
         try {
