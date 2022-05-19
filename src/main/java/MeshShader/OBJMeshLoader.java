@@ -12,7 +12,7 @@ public class OBJMeshLoader implements MeshLoader {
 
 
     @Override
-    public  Mesh loadMesh(String fileName) {
+    public Mesh loadMesh(String fileName) {
         String[] splitName = fileName.split("\\.");
         String endingWord = splitName[splitName.length - 1];
         Map<Vertex[],int[]> rm = new HashMap<>();

@@ -31,7 +31,7 @@ public class Demo implements Game {
         sh = new Shader();
 
         MeshLoader myLoader = new OBJMeshLoader();
-        m= myLoader.loadMesh("res/Cube.obj");
+        m = myLoader.loadMesh("res/Cube.obj");
 
         try {
             tr = new Transform();
