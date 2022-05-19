@@ -5,6 +5,8 @@ import Test.Demo;
 import render.Window;
 import util.Time;
 
+import java.io.IOException;
+
 public class EngineCore implements Runnable {
     private Thread loopthread;
     private boolean running = false;

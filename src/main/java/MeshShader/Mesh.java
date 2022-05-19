@@ -3,10 +3,6 @@ package MeshShader;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL30.*;
-import static org.lwjgl.opengl.GL33.*;
-
-import org.lwjgl.opengl.*;
 
 public class Mesh {
     private int vbo;
