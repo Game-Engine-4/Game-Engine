@@ -4,6 +4,7 @@ package MeshShader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,7 @@ public class OBJMeshLoader implements MeshLoader {
 
 
     @Override
-    public Mesh loadMesh(String fileName) {
+    public Mesh loadMesh(String fileName) throws IOException {
         String[] splitName = fileName.split("\\.");
         String endingWord = splitName[splitName.length - 1];
         Map<Vertex[],int[]> rm = new HashMap<>();
@@ -58,10 +59,8 @@ public class OBJMeshLoader implements MeshLoader {
             return objMesh;
 
         } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
+            System.out.println("Couldn't read from obj file");
+            throw e;
         }
-
-        return null;
     }
 }

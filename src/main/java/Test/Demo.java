@@ -25,7 +25,7 @@ public class Demo implements Game {
     public Demo() {
     }
 
-    public void init() {
+    public void init() throws IOException {
 
         m = new Mesh();
         sh = new Shader();
