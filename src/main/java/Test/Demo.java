@@ -25,13 +25,19 @@ public class Demo implements Game {
     public Demo() {
     }
 
-    public void init() throws IOException {
+    public void init() {
 
         m = new Mesh();
         sh = new Shader();
 
         MeshLoader myLoader = new OBJMeshLoader();
-        m = myLoader.loadMesh("res/Cube.obj");
+        try {
+            m = myLoader.loadMesh("res/Cube.obj");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         try {
             tr = new Transform();
@@ -62,9 +68,9 @@ public class Demo implements Game {
 
         float sinTemp = (float)Math.sin(temp);
 
-       // this.tr.setTranslation(sinTemp, 0, 0);
+        this.tr.setTranslation(sinTemp, 0, 0);
         this.tr.setRotation(0, sinTemp * 180, sinTemp * 180);
-        this.tr.setScale(sinTemp, sinTemp, sinTemp);
+        this.tr.setScale(sinTemp/2, sinTemp/2, sinTemp/2);
     }
 
     @Override
