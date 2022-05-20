@@ -2,10 +2,10 @@ package main;
 
 import Inputs.Input;
 import Test.Demo;
+import Test.DemoBonus;
 import render.Window;
 import util.Time;
 
-import java.io.IOException;
 
 public class EngineCore implements Runnable {
     private Thread loopthread;
@@ -96,7 +96,7 @@ public class EngineCore implements Runnable {
         return this.input;
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         EngineCore engine = new EngineCore(new Demo());
         engine.start();
     }
