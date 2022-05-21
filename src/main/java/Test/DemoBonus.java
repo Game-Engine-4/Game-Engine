@@ -5,14 +5,8 @@ import main.Game;
 import Inputs.Input;
 import util.Time;
 import util.Utils;
-import Math.Vector3f;
 import Math.Transform;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
 
 import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
 import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
@@ -31,13 +25,12 @@ public class DemoBonus implements Game {
         sh = new Shader();
 
         MeshLoader myLoader = new OBJMeshLoader();
+
         try {
             m = myLoader.loadMesh("res/Boat.obj");
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         try {
             tr = new Transform();
@@ -47,6 +40,7 @@ public class DemoBonus implements Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         sh.compileShader();
 
         sh.addUniform("transform");
