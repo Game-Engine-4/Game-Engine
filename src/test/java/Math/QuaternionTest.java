@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 class QuaternionTest {
     Quaternion q1;
@@ -102,6 +103,25 @@ class QuaternionTest {
         Quaternion q3 = new Quaternion(3, 6, 3, 6);
         assertNotEquals(q3, q1.mul(new Vector3f(1, 1, 1)));
     }
-
+    @Test
+    void testSetX() {
+        q1.setX(3);
+    assertTrue(q1.getX() == 3);
+    }
+    @Test
+    void testSetY() {
+        q1.setY(3);
+        assertTrue(q1.getY() == 3);
+    }
+    @Test
+    void testSetZ() {
+        q1.setZ(3);
+        assertTrue(q1.getZ() == 3);
+    }
+    @Test
+    void testSetW() {
+        q1.setW(3);
+        assertTrue(q1.getW() == 3);
+    }
 
 }
