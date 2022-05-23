@@ -15,6 +15,19 @@ class Vector3fTest {
         v1 = new Vector3f(1, 2, 3);
         v2 = new Vector3f(2, 4, 6);
     }
+    @Test
+    void testConstructor() {
+        assertEquals(new Vector3f(0, 0,0), new Vector3f());
+    }
+
+    @Test
+    void testConstructorVector() {
+        assertEquals(new Vector3f(1f, 2f,3f), new Vector3f(v1));
+    }
+    @Test
+    void testConstructorScalar() {
+        assertEquals(new Vector3f(3f, 3f,3f), new Vector3f(3));
+    }
 
     @Test
     void testDistanceSquared() {
