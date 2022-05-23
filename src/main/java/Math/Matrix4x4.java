@@ -2,8 +2,6 @@ package Math;
 
 import org.joml.Options;
 import org.joml.Runtime;
-
-
 import java.text.NumberFormat;
 
 public class Matrix4x4 {
