@@ -11,8 +11,8 @@ public class EngineCore implements Runnable {
     private Thread loopthread;
     private boolean running = false;
     private boolean isRendered = false;
-    private static final int width = 1280;
-    private static final int height = 760;
+    private static final int width =1280;
+    private static final int height = 660;
     private Time time = new Time();
     private static Window frame = new Window(EngineCore.width, EngineCore.height, "Game Engine");
     private Input input = new Input();
@@ -100,6 +100,4 @@ public class EngineCore implements Runnable {
         EngineCore engine = new EngineCore(new Demo());
         engine.start();
     }
-
-
 }
