@@ -1,10 +1,10 @@
 package Math;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 class Matrix4x4Test {
     Matrix4x4 matrix1;
@@ -122,6 +122,24 @@ class Matrix4x4Test {
         assertNotEquals(matrix3, matrix1);
     }
 
+//    @Test
+//    void testInitFloatRotation() {
+//        Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
+//                { 9.997E-1f, -1.775E-2f, -1.714E-2f, 0.000E+0f},
+//                {1.745E-2f, 9.997E-1f, -1.775E-2f, 0.000E+0f},
+//                {1.745E-2f , 1.745E-2f, 9.997E-1f, 0.000E+0f},
+//                {0.000E+0f, 0.000E+0f, 0.000E+0f, 1.000E+0f}
+//        });
+//        assertEquals(matrix3, matrix1.InitRotation(1, 1, 1));
+//    }
+
+    @Test
+    void testRotation() {
+        Vector3f f = new Vector3f(1, 1, 1);
+        Vector3f u = new Vector3f(1, 1, 1);
+        assertEquals(matrix1, matrix1.InitRotation(f, u));
+    }
+
     @Test
     void testInitOrthographic() {
         Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
@@ -194,6 +212,48 @@ class Matrix4x4Test {
         assertNotEquals(m2, m1);
     }
 
+    @Test
+    void testMulMatrix() {
+        Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
+                {4, 0, 4, 0},
+                {4, 0, 4, 0},
+                {4, 0, 4, 0},
+                {4, 0, 4, 0}
+        });
+        assertEquals(matrix3, matrix1.Mul(matrix2));
+    }
+
+    @Test
+    void testGetM() {
+        float[][] matrix3 = new float[][]{
+                {1, 0, 1, 0},
+                {1, 0, 1, 0},
+                {1, 0, 1, 0},
+                {1, 0, 1, 0}
+        };
+        assertArrayEquals(matrix3, matrix1.GetM());
+    }
+
+    @Test
+    void testGet() {
+        Assertions.assertEquals(0f, matrix1.Get(3, 3));
+    }
+
+    @Test
+    void testSetMatrix() {
+        Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
+                {1, 0, 0, 0},
+                {1, 0, 0, 1},
+                {1, 0, 1, 1},
+                {0, 0, 1, 1}
+        });
+        matrix1.SetM(new float[][]{{1, 0, 0, 0},
+                {1, 0, 0, 1},
+                {1, 0, 1, 1},
+                {0, 0, 1, 1}
+        });
+        assertEquals(matrix3, matrix1);
+    }
 }
 
 

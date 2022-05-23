@@ -1,5 +1,11 @@
 package Math;
 
+import org.joml.Options;
+import org.joml.Runtime;
+
+
+import java.text.NumberFormat;
+
 public class Matrix4x4 {
     private float[][] m;
 
@@ -285,5 +291,32 @@ public class Matrix4x4 {
     public void Set(int x, int y, float value) {
         m[x][y] = value;
     }
+    public String toString() {
+        String str = toString(Options.NUMBER_FORMAT);
+        StringBuffer res = new StringBuffer();
+        int eIndex = Integer.MIN_VALUE;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c == 'E') {
+                eIndex = i;
+            } else if (c == ' ' && eIndex == i - 1) {
+                // workaround Java 1.4 DecimalFormat bug
+                res.append('+');
+                continue;
+            } else if (Character.isDigit(c) && eIndex == i - 1) {
+                res.append('+');
+            }
+            res.append(c);
+        }
+        return res.toString();
+    }
+
+    public String toString(NumberFormat formatter) {
+        return Runtime.format(m[0][0], formatter) + " " + Runtime.format(m[1][0], formatter) + " " + Runtime.format(m[2][0], formatter) + " " + Runtime.format(m[3][0], formatter) + "\n"
+                + Runtime.format(m[0][1], formatter) + " " + Runtime.format(m[1][1], formatter) + " " + Runtime.format(m[2][1], formatter) + " " + Runtime.format(m[3][1], formatter) + "\n"
+                + Runtime.format(m[0][2], formatter) + " " + Runtime.format(m[1][2], formatter) + " " + Runtime.format(m[2][2], formatter) + " " + Runtime.format(m[3][2], formatter) + "\n"
+                + Runtime.format(m[0][3], formatter) + " " + Runtime.format(m[1][3], formatter) + " " + Runtime.format(m[2][3], formatter) + " " + Runtime.format(m[3][3], formatter) + "\n";
+    }
+
 
 }
