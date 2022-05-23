@@ -29,7 +29,20 @@ class Vector2fTest {
     }
 
     @Test
+    void testSet() {
+        v1.set(2, 2);
+        assertTrue(v1.x == 2 && v1.y == 2);
+
+    }
+
+    @Test
     void testSetZero() {
+        v1.setZero();
+        assertTrue(v1.x == 0 && v1.y == 0);
+    }
+
+    @Test
+    void testStaticSetZero() {
         Vector2f v3 = new Vector2f(0, 0);
         assertEquals(v3, Vector2f.setZero(v1));
     }
@@ -111,6 +124,21 @@ class Vector2fTest {
     void testToCartesian() {
         Vector2f v3 = new Vector2f(-0.41614684f, 0.90929743f);
         assertEquals(v3, v1.toCartesian(1, 2));
+    }
+
+    @Test
+    void testRotateByAngle() {
+        v1.rotateBy(1);
+        Vector2f v3 = new Vector2f(-1.1426396f, 1.9220755f);
+        assertEquals(v3, v1);
+    }
+
+    @Test
+    void testRotateTo() {
+        v1.rotateTo(1);
+        Vector2f v3 = new Vector2f(1.2081527f, 1.8815863f);
+        assertEquals(v3, v1);
+
     }
 
     @Test
@@ -324,5 +352,12 @@ class Vector2fTest {
     @Test
     void failedTestStaticDistSquared() {
         assertNotEquals(Math.sqrt(5), Vector2f.distSquared(v1, v2));
+    }
+
+    @Test
+    void testToString() {
+        v1.toString();
+        Vector2f v3 = new Vector2f(1, 2);
+        assertEquals(v3, v1);
     }
 }
