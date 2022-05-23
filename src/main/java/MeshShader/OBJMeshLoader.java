@@ -1,25 +1,20 @@
 package MeshShader;
 
-
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import Math.Vector3f;
-public class OBJMeshLoader implements MeshLoader {
 
+public class OBJMeshLoader implements MeshLoader {
 
     @Override
     public Mesh loadMesh(String fileName) throws IOException {
         String[] splitName = fileName.split("\\.");
         String endingWord = splitName[splitName.length - 1];
-        Map<Vertex[],int[]> rm = new HashMap<>();
+
         if (!endingWord.equals("obj")) {
-            System.out.println("Error occured, this isn't the right type of file");
-            System.exit(1);
+            throw new IOException("Wrong type of file");
         }
 
         ArrayList<Vertex> vertices = new ArrayList<>();
