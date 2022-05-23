@@ -29,38 +29,79 @@ class QuaternionTest {
     }
 
     @Test
-    void testNormalize() {
+    void testNonStaticNormalize() {
+        Quaternion q4 = new Quaternion(2f / 4f, 2f / 4f, 2f / 4f, 2f / 4f);
+        q3.normalize();
+        assertEquals(q4, q3);
+    }
+
+    @Test
+    void failedTestNonStaticNormalize() {
+        Quaternion q4 = new Quaternion(2f / 3f, 2f / 4f, 2f / 5f, 2f / 4f);
+        q3.normalize();
+        assertNotEquals(q4, q3);
+    }
+
+    @Test
+    void testStaticNormalize() {
         Quaternion q4 = new Quaternion(2f / 4f, 2f / 4f, 2f / 4f, 2f / 4f);
         assertEquals(q4, Quaternion.normalize(q3));
     }
 
     @Test
-    void failedTestNormalize() {
+    void failedTestStaticNormalize() {
         Quaternion q4 = new Quaternion(2f / 3f, 2f / 4f, 2f / 5f, 2f / 4f);
         assertNotEquals(q4, Quaternion.normalize(q3));
     }
 
     @Test
-    void testConjugate() {
+    void testNonStaticConjugate() {
+        Quaternion q3 = new Quaternion(1, -2, -3, -4);
+        assertEquals(q3.conjugate(), q1);
+    }
+
+    @Test
+    void failedTestNonStaticConjugate() {
+        Quaternion q3 = new Quaternion(1, 2, -3, -4);
+        q3.conjugate();
+        assertNotEquals(q3, q1);
+    }
+
+    @Test
+    void testStaticConjugate() {
         Quaternion q3 = new Quaternion(1, -2, -3, -4);
         assertEquals(q3, Quaternion.conjugate(q1));
     }
 
     @Test
-    void failedTestConjugate() {
+    void failedTestStaticConjugate() {
         Quaternion q3 = new Quaternion(1, 2, -3, -4);
         assertNotEquals(q3, Quaternion.conjugate(q1));
     }
 
     @Test
-    void testMul() {
+    void testStaticMul() {
         Quaternion q3 = new Quaternion(8, 12, 16, -56);
         assertEquals(q3, Quaternion.mul(q1, q2));
     }
 
     @Test
-    void failedTestMul() {
+    void failedTestStaticMul() {
         Quaternion q3 = new Quaternion(8, 12, 16, 56);
         assertNotEquals(q3, Quaternion.mul(q1, q2));
     }
+
+    @Test
+    void testVectorMul() {
+        Quaternion q3 = new Quaternion(3, 6, 3, -6);
+        assertEquals(q3, q1.mul(new Vector3f(1, 1, 1)));
+    }
+
+    @Test
+    void failedTestVectorMul() {
+        Quaternion q3 = new Quaternion(3, 6, 3, 6);
+        assertNotEquals(q3, q1.mul(new Vector3f(1, 1, 1)));
+    }
+
+
 }

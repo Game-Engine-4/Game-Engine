@@ -67,10 +67,11 @@ public class Quaternion {
     }
 
     public Quaternion mul(Vector3f r) {
-        float W = -x * r.getX() - y * r.getY() - z * r.getZ();
+
         float X = w * r.getX() + y * r.getZ() - z * r.getY();
         float Y = w * r.getY() + z * r.getX() - x * r.getZ();
         float Z = w * r.getZ() + x * r.getY() - y * r.getX();
+        float W = -x * r.getX() - y * r.getY() - z * r.getZ();
 
         return new Quaternion(X, Y, Z, W);
     }
