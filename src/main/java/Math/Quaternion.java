@@ -14,6 +14,7 @@ public class Quaternion {
         this.w = w;
     }
 
+
     public float length() {
         return (float) Math.sqrt(x * x + y * y + z * z + w * w);
     }
@@ -30,11 +31,20 @@ public class Quaternion {
         return this;
     }
 
+    public static Quaternion normalize(Quaternion q) {
+        float l = q.length();
+        return new Quaternion(q.x / l, q.y / l, q.z / l, q.w / l);
+    }
+
     public Quaternion conjugate() {
         return new Quaternion(x, -y, -z, -w);
     }
 
-    public Quaternion mul(Quaternion a1, Quaternion a2) {
+    public static Quaternion conjugate(Quaternion q) {
+        return new Quaternion(q.x, -q.y, -q.z, -q.w);
+    }
+
+    public static Quaternion mul(Quaternion a1, Quaternion a2) {
         // Components of the first quaternion.
         final float a11 = a1.getX();
         final float a12 = a1.getY();
@@ -54,16 +64,25 @@ public class Quaternion {
         final float W = a11 * a21 - a12 * a22 - a13 * a23 - a14 * a24;
 
         return new Quaternion(X, Y, Z, W);
-
     }
 
     public Quaternion mul(Vector3f r) {
+
+        float X = w * r.getX() + y * r.getZ() - z * r.getY();
+        float Y = w * r.getY() + z * r.getX() - x * r.getZ();
+        float Z = w * r.getZ() + x * r.getY() - y * r.getX();
         float W = -x * r.getX() - y * r.getY() - z * r.getZ();
-        float X =  w * r.getX() + y * r.getZ() - z * r.getY();
-        float Y =  w * r.getY() + z * r.getX() - x * r.getZ();
-        float Z =  w * r.getZ() + x * r.getY() - y * r.getX();
 
         return new Quaternion(X, Y, Z, W);
+    }
+
+    public boolean equals(Object v) {
+        float epsilon = 0.0001f;
+        if (v instanceof Quaternion) {
+            return Math.abs(this.x - ((Quaternion) v).x) < epsilon && Math.abs(this.y - ((Quaternion) v).y) < epsilon
+                    && Math.abs(this.z - ((Quaternion) v).z) < epsilon && Math.abs(this.w - ((Quaternion) v).w) < epsilon;
+        }
+        return false;
     }
 
     public float getX() {

@@ -42,6 +42,10 @@ public class Vector3f {
         return Math.sqrt(distanceSquared(v1, v2));
     }
 
+    public static Vector3f add(Vector3f v1, Vector3f v2) {
+        return new Vector3f(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+    }
+
     public Vector3f add(float dx, float dy, float dz) {
         this.x += dx;
         this.y += dy;
@@ -64,11 +68,19 @@ public class Vector3f {
         return this;
     }
 
+    public static Vector3f sub(Vector3f v1, Vector3f v2) {
+        return new Vector3f(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+    }
+
     public Vector3f mul(Vector3f v) {
         this.x = x * v.x;
         this.y = y * v.y;
         this.z = z * v.z;
         return this;
+    }
+
+    public static Vector3f mul(Vector3f v, float sc) {
+        return new Vector3f(v.x * sc, v.y * sc, v.z * sc);
     }
 
     public Vector3f mul(Vector3f v, Vector3f dest) {
@@ -92,8 +104,16 @@ public class Vector3f {
         return dest;
     }
 
+    public static Vector3f div(Vector3f v, float sc) {
+        return new Vector3f(v.x / sc, v.y / sc, v.z / sc);
+    }
+
     public float dot(Vector3f v) {
         return this.x * v.x + this.y * v.y + this.z * v.z;
+    }
+
+    public static float dot(Vector3f v2, Vector3f v1) {
+        return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
     }
 
     public Vector3f normalize() {
@@ -104,6 +124,11 @@ public class Vector3f {
             this.z /= l;
         }
         return this;
+    }
+
+    public static Vector3f normalize(Vector3f v) {
+        float l = v.length();
+        return new Vector3f(v.x / l, v.y / l, v.z / l);
     }
 
     public float angle(Vector3f v) {
@@ -120,6 +145,10 @@ public class Vector3f {
         this.y = 0;
         this.z = 0;
         return this;
+    }
+
+    public static Vector3f setZero(Vector3f v) {
+        return new Vector3f(0, 0, 0);
     }
 
     public Vector3f set(Vector3f v) {
@@ -145,6 +174,10 @@ public class Vector3f {
 
     public float lengthSquared() {
         return (this.x * this.x + this.y * this.y + this.z * this.z);
+    }
+
+    public static float lengthSquared(Vector3f v) {
+        return (v.x * v.x + v.y * v.y + v.z * v.z);
     }
 
     public float length() {
@@ -235,6 +268,16 @@ public class Vector3f {
         return dest;
     }
 
+    @Override
+    public boolean equals(Object v) {
+        float epsilon = 0.00001f;
+        if (v instanceof Vector3f) {
+            return Math.abs(this.x - ((Vector3f) v).x) < epsilon && Math.abs(this.y - ((Vector3f) v).y) < epsilon
+                    && Math.abs(this.z - ((Vector3f) v).z) < epsilon;
+        }
+        return false;
+    }
+
     public float getX() {
         return x;
     }
@@ -248,5 +291,3 @@ public class Vector3f {
     }
 
 }
-
-
