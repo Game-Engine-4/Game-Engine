@@ -19,6 +19,16 @@ class Vector2fTest {
     }
 
     @Test
+    void testConstructor() {
+        assertEquals(new Vector2f(0, 0), new Vector2f());
+    }
+
+    @Test
+    void testConstructorVector() {
+        assertEquals(new Vector2f(1f, 2f), new Vector2f(v1));
+    }
+
+    @Test
     void testSetZero() {
         Vector2f v3 = new Vector2f(0, 0);
         assertEquals(v3, Vector2f.setZero(v1));
