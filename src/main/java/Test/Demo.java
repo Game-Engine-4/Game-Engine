@@ -3,6 +3,7 @@ package Test;
 import MeshShader.*;
 import main.Game;
 import Inputs.Input;
+import render.Window;
 import util.Time;
 import util.Utils;
 import Math.Transform;
@@ -34,6 +35,8 @@ public class Demo implements Game {
 
         try {
             tr = new Transform();
+            Transform.setProjection(70f, 1280, 660,0.1f,1000);
+
 
             sh.addProgram(Utils.loadResource("res/shaders/v1vs.glsl"), GL_VERTEX_SHADER);
             sh.addProgram(Utils.loadResource("res/shaders/v1fs.glsl"), GL_FRAGMENT_SHADER);
@@ -72,8 +75,8 @@ public class Demo implements Game {
             temp3 += 3*Time.getDelta();
         }
 
-        this.tr.setScale(sinTemp3/2, sinTemp3/2, sinTemp3/2);
-        this.tr.setTranslation(sinTemp2, 0, 0);
+        //this.tr.setScale(sinTemp3/2, sinTemp3/2, sinTemp3/2);
+        this.tr.setTranslation(sinTemp2, 0, 5);
         this.tr.setRotation(0, sinTemp * 180, sinTemp * 180);
     }
 
@@ -81,7 +84,7 @@ public class Demo implements Game {
     public void render() {
         System.out.println("render");
         sh.bind();
-        sh.setUniform("transform", tr.getTransformation());
+        sh.setUniform("transform", tr.getProjectedTransformation());
         m.draw();
     }
 }
