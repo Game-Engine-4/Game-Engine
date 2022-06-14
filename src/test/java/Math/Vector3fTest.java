@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Vector3fTest {
     Vector3f v1;
@@ -15,18 +16,20 @@ class Vector3fTest {
         v1 = new Vector3f(1, 2, 3);
         v2 = new Vector3f(2, 4, 6);
     }
+
     @Test
     void testConstructor() {
-        assertEquals(new Vector3f(0, 0,0), new Vector3f());
+        assertEquals(new Vector3f(0, 0, 0), new Vector3f());
     }
 
     @Test
     void testConstructorVector() {
-        assertEquals(new Vector3f(1f, 2f,3f), new Vector3f(v1));
+        assertEquals(new Vector3f(1f, 2f, 3f), new Vector3f(v1));
     }
+
     @Test
     void testConstructorScalar() {
-        assertEquals(new Vector3f(3f, 3f,3f), new Vector3f(3));
+        assertEquals(new Vector3f(3f, 3f, 3f), new Vector3f(3));
     }
 
     @Test
@@ -49,6 +52,12 @@ class Vector3fTest {
     void testNonStaticAdd() {
         Vector3f v3 = new Vector3f(3, 6, 9);
         assertEquals(v3, v1.add(v2));
+    }
+
+    @Test
+    void testScalarAdd() {
+        Vector3f v3 = new Vector3f(11, 12, 13);
+        assertEquals(v3, v1.add(10));
     }
 
     @Test
@@ -77,6 +86,12 @@ class Vector3fTest {
     }
 
     @Test
+    void testScalarSub() {
+        Vector3f v3 = new Vector3f(0, 1, 2);
+        assertEquals(v3, v1.sub(1));
+    }
+
+    @Test
     void testSub() {
         Vector3f v3 = new Vector3f(1, 2, 3);
         assertEquals(v3, v2.sub(1, 2, 3));
@@ -98,6 +113,12 @@ class Vector3fTest {
     void testNonStaticMul() {
         Vector3f v3 = new Vector3f(2, 8, 18);
         assertEquals(v3, v1.mul(v2));
+    }
+
+    @Test
+    void testScalarMul() {
+        Vector3f v3 = new Vector3f(10, 20, 30);
+        assertEquals(v3, v1.mul(10));
     }
 
     @Test
@@ -123,6 +144,12 @@ class Vector3fTest {
     void testNonStaticDiv() {
         Vector3f v3 = new Vector3f(2, 2, 2);
         assertEquals(v3, v2.div(v1));
+    }
+
+    @Test
+    void testScalarDiv() {
+        Vector3f v3 = new Vector3f(1, 2, 3);
+        assertEquals(v3, v1.div(1));
     }
 
     @Test
@@ -220,6 +247,11 @@ class Vector3fTest {
     }
 
     @Test
+    void testNonStaticLengthSquared() {
+        assertEquals(14f, v1.lengthSquared());
+    }
+
+    @Test
     void failedTestLengthSquared() {
         assertNotEquals(15f, Vector3f.lengthSquared(v1));
     }
@@ -262,33 +294,58 @@ class Vector3fTest {
         Vector3f v3 = new Vector3f(1, -1.443808343f, 3.303848887f);
         assertEquals(v3, v1.rotateX(1));
     }
+
     @Test
     void testDestRotateX() {
         Vector3f v3 = new Vector3f(1, -1.443808343f, 3.303848887f);
-        Vector3f v4 = new Vector3f(1,1,1);
+        Vector3f v4 = new Vector3f(1, 1, 1);
         assertEquals(v3, v1.rotateX(1, v4));
     }
+
     @Test
     void testRotateY() {
         Vector3f v3 = new Vector3f(3.06471526f, 2, 0.7794359328f);
         assertEquals(v3, v1.rotateY(1));
     }
+
     @Test
     void testDestRotateY() {
         Vector3f v3 = new Vector3f(3.06471526f, 2, 0.7794359328f);
-        Vector3f v4 = new Vector3f(1,1,1);
+        Vector3f v4 = new Vector3f(1, 1, 1);
         assertEquals(v3, v1.rotateY(1, v4));
     }
+
     @Test
     void testRotateZ() {
         Vector3f v3 = new Vector3f(-1.142639664f, 1.922075597f, 3);
         assertEquals(v3, v1.rotateZ(1));
     }
+
     @Test
     void testDestRotateZ() {
         Vector3f v3 = new Vector3f(-1.142639664f, 1.922075597f, 3);
-        Vector3f v4 = new Vector3f(1,1,1);
+        Vector3f v4 = new Vector3f(1, 1, 1);
         assertEquals(v3, v1.rotateZ(1, v4));
     }
 
+    @Test
+    void testSetX() {
+        v1.setX(13);
+        assertTrue(v1.getX() == 13);
+
+    }
+
+    @Test
+    void testSetY() {
+        v1.setY(13);
+        assertTrue(v1.getY() == 13);
+
+    }
+
+    @Test
+    void testSetZ() {
+        v1.setZ(13);
+        assertTrue(v1.getZ() == 13);
+
+    }
 }
