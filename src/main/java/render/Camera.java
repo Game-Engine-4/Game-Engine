@@ -10,13 +10,13 @@ public class Camera
     private Vector3f pos;
     private Vector3f forward;
     private Vector3f up;
-
-    public Camera()
+    private static Camera instance;
+    private Camera()
     {
         this(new Vector3f(0,0,0), new Vector3f(0,0,1), new Vector3f(0,1,0));
     }
 
-    public Camera(Vector3f pos, Vector3f forward, Vector3f up)
+    private Camera(Vector3f pos, Vector3f forward, Vector3f up)
     {
         this.pos = pos;
         this.forward = forward;
@@ -26,6 +26,12 @@ public class Camera
         forward.normalize();
     }
 
+    public static Camera getInstance(){
+        if(instance == null){
+            instance = new Camera();
+        }
+        return instance;
+    }
     public void input()
     {
 

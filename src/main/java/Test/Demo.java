@@ -27,7 +27,7 @@ public class Demo implements Game {
 
         m = new Mesh();
         sh = new Shader();
-        camera = new Camera();
+        camera = Camera.getInstance();
 
 
         MeshLoader myLoader = new OBJMeshLoader();

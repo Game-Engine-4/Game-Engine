@@ -123,13 +123,13 @@ public class Matrix4x4 {
 
         ry.m[0][0] = (float) Math.cos(y);
         ry.m[0][1] = 0;
-        ry.m[0][2] = -(float) Math.sin(y);
+        ry.m[0][2] = (float) Math.sin(y);
         ry.m[0][3] = 0;
         ry.m[1][0] = 0;
         ry.m[1][1] = 1;
         ry.m[1][2] = 0;
         ry.m[1][3] = 0;
-        ry.m[2][0] = (float) Math.sin(y);
+        ry.m[2][0] = -(float) Math.sin(y);
         ry.m[2][1] = 0;
         ry.m[2][2] = (float) Math.cos(y);
         ry.m[2][3] = 0;
