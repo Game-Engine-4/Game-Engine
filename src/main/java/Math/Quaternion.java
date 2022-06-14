@@ -51,12 +51,6 @@ public class Quaternion {
         final float a13 = r.getZ();
         final float a14 = r.getW();
 
-        //Component of the product
-        //final float X = a11 * y + a12 * x + a13 * w - a14 * z;
-        //final float Y = a11 * z - a12 * w + a13 * x + a14 * y;
-        //final float Z = a11 * w + a12 * z - a13 * y + a14 * x;
-        //final float W = a11 * x - a12 * y - a13 * z - a14 * w;
-
         final float W = w * a14 - x * a11 - y * a12 - z * a13;
         final float X = x * a14 + w * a11 + y * a13 - z * a12;
         final float Y = y * a14 + w * a12 + z * a11 - x * a13;
@@ -80,10 +74,10 @@ public class Quaternion {
         final float a24 = a2.getW();
 
         //Component of the product
-        final float X = a11 * a22 + a12 * a21 + a13 * a24 - a14 * a23;
-        final float Y = a11 * a23 - a12 * a24 + a13 * a21 + a14 * a22;
-        final float Z = a11 * a24 + a12 * a23 - a13 * a22 + a14 * a21;
-        final float W = a11 * a21 - a12 * a22 - a13 * a23 - a14 * a24;
+        final float W = a24 * a14 - a21 * a11 - a22 * a12 - a23 * a13;
+        final float X = a21 * a14 + a24 * a11 + a22 * a13 - a23 * a12;
+        final float Y = a22 * a14 + a24 * a12 + a23 * a11 - a21 * a13;
+        final float Z = a23 * a14 + a24 * a13 + a21 * a12 - a22 * a11;
 
         return new Quaternion(X, Y, Z, W);
     }

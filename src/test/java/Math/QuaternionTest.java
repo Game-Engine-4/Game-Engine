@@ -57,7 +57,7 @@ class QuaternionTest {
 
     @Test
     void testNonStaticConjugate() {
-        Quaternion q3 = new Quaternion(1, -2, -3, -4);
+        Quaternion q3 = new Quaternion(-1, -2, -3, 4);
         assertEquals(q3.conjugate(), q1);
     }
 
@@ -70,7 +70,7 @@ class QuaternionTest {
 
     @Test
     void testStaticConjugate() {
-        Quaternion q3 = new Quaternion(1, -2, -3, -4);
+        Quaternion q3 = new Quaternion(-1, -2, -3, 4);
         assertEquals(q3, Quaternion.conjugate(q1));
     }
 
@@ -82,7 +82,13 @@ class QuaternionTest {
 
     @Test
     void testStaticMul() {
-        Quaternion q3 = new Quaternion(8, 12, 16, -56);
+        Quaternion q3 = new Quaternion(16, 32, 48, 4);
+        assertEquals(q3, q1.mul(q2));
+    }
+
+    @Test
+    void tesMul() {
+        Quaternion q3 = new Quaternion(16, 32, 48, 4);
         assertEquals(q3, Quaternion.mul(q1, q2));
     }
 
@@ -103,21 +109,25 @@ class QuaternionTest {
         Quaternion q3 = new Quaternion(3, 6, 3, 6);
         assertNotEquals(q3, q1.mul(new Vector3f(1, 1, 1)));
     }
+
     @Test
     void testSetX() {
         q1.setX(3);
-    assertTrue(q1.getX() == 3);
+        assertTrue(q1.getX() == 3);
     }
+
     @Test
     void testSetY() {
         q1.setY(3);
         assertTrue(q1.getY() == 3);
     }
+
     @Test
     void testSetZ() {
         q1.setZ(3);
         assertTrue(q1.getZ() == 3);
     }
+
     @Test
     void testSetW() {
         q1.setW(3);
