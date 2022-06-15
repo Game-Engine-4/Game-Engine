@@ -6,6 +6,9 @@ import Math.Vector3f;
  * Class to represent Vertex, containing Vector
  */
 public class Vertex {
+    /**
+     * Attribute for storing size of the vertices
+     */
     public static final int SIZE = 3;
     private Vector3f pos;
 
