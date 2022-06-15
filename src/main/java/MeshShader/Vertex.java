@@ -39,7 +39,7 @@ public class Vertex {
 
     /**
      * Gets the vector of the class
-     * @return this Vector3f
+     * @return This current vector
      */
     public Vector3f getPos() {
         return pos;
@@ -47,7 +47,7 @@ public class Vertex {
 
     /**
      * Changes the vector of the vertex using given vector
-     * @param pos given Vector
+     * @param pos Given Vector3f
      */
     public void setPos(Vector3f pos) {
         this.pos = pos;

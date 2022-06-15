@@ -12,8 +12,8 @@ import Math.Matrix4x4;
 public class Util {
     /**
      * Helper method for 'createFlippedBuffer' creating float buffer according to size
-     * @param size size of array of vertices
-     * @return float buffer
+     * @param size Size of array of vertices
+     * @return Float buffer
      */
     public static FloatBuffer createFloatBuffer(int size){
         return BufferUtils.createFloatBuffer(size);
@@ -21,8 +21,8 @@ public class Util {
 
     /**
      * Helper method for creating int buffer
-     * @param size size of array of indices
-     * @return int buffer
+     * @param size Size of array of indices
+     * @return Int buffer
      */
     public static IntBuffer createIntBuffer(int size) {
         return BufferUtils.createIntBuffer(size);
@@ -30,8 +30,8 @@ public class Util {
 
     /**
      * Method taking array of indices to put into right format
-     * @param val array of indices
-     * @return flipped int buffer
+     * @param val Array of indices
+     * @return Flipped int buffer
      */
     public static IntBuffer createFlippedBuffer(int[] val) {
         IntBuffer buffer = createIntBuffer(val.length);
@@ -42,8 +42,8 @@ public class Util {
 
     /**
      * Method taking array of vertex to put it into right format, flipping all the data into correct positions
-     * @param vertices array of Vertex
-     * @return
+     * @param vertices Array of Vertex
+     * @return Flipped buffer of vertices
      */
     public static FloatBuffer createFlippedBuffer(Vertex[] vertices){
 
@@ -62,8 +62,8 @@ public class Util {
 
     /**
      * Method creating flipped buffer according to given matrix
-     * @param value matrix containing data used to set uniform
-     * @return flipped float buffer of given matrix
+     * @param value Matrix containing data used to set uniform
+     * @return Flipped float buffer of given matrix
      */
     public static FloatBuffer createFlippedBuffer(Matrix4x4 value) {
         FloatBuffer buffer = createFloatBuffer(4 * 4);

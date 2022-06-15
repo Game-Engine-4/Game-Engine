@@ -35,7 +35,7 @@ public class Shader {
 
     /**
      * Method taking some string and make shader to start tracking of it
-     * @param uniform name of uniform
+     * @param uniform String name of uniform
      */
     public void addUniform(String uniform) {
         int uniformLocation = glGetUniformLocation(program, uniform);
