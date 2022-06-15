@@ -122,17 +122,6 @@ class Matrix4x4Test {
         assertNotEquals(matrix3, matrix1);
     }
 
-//    @Test
-//    void testInitFloatRotation() {
-//        Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
-//                { 9.997E-1f, -1.775E-2f, -1.714E-2f, 0.000E+0f},
-//                {1.745E-2f, 9.997E-1f, -1.775E-2f, 0.000E+0f},
-//                {1.745E-2f , 1.745E-2f, 9.997E-1f, 0.000E+0f},
-//                {0.000E+0f, 0.000E+0f, 0.000E+0f, 1.000E+0f}
-//        });
-//        assertEquals(matrix3, matrix1.InitRotation(1, 1, 1));
-//    }
-
     @Test
     void testRotation() {
         Vector3f f = new Vector3f(1, 1, 1);
@@ -197,19 +186,29 @@ class Matrix4x4Test {
     }
 
     @Test
-    void testTransform() {
-        Vector3f r = new Vector3f(1, 1, 1);
-        Vector3f m1 = new Vector3f(2f, 2f, 2f);
-        Vector3f m2 = new Vector3f(matrix1.Transform(r));
-        assertEquals(m2, m1);
+    void testProjectionMatrix() {
+        Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
+                {(float) (1f / 1.55740772), 0, 0, 0},
+                {0, (float) (1f / 1.55740772), 0, 0},
+                {0, 0, -5, 12},
+                {0, 0, 1, 0}
+        });
+        matrix1.InitProjection(2, 1, 1, 3, 2);
+        assertEquals(matrix3, matrix1);
     }
 
     @Test
-    void failedTestTransform() {
-        Vector3f r = new Vector3f(1, 1, 1);
-        Vector3f m1 = new Vector3f(21f, 2f, 2f);
-        Vector3f m2 = new Vector3f(matrix1.Transform(r));
-        assertNotEquals(m2, m1);
+    void testInitCamera() {
+        Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {1 / 3f, 2 / 3f, 2 / 3f, 0},
+                {0, 0, 0, 1}
+        });
+        Vector3f f = new Vector3f(1, 2, 2);
+        Vector3f u = new Vector3f(1, 2, 2);
+        matrix1.InitCamera(f, u);
+        assertEquals(matrix3, matrix1);
     }
 
     @Test
@@ -224,7 +223,7 @@ class Matrix4x4Test {
     }
 
     @Test
-    void testGetM() {
+    void testGetMatrix() {
         float[][] matrix3 = new float[][]{
                 {1, 0, 1, 0},
                 {1, 0, 1, 0},
@@ -232,6 +231,17 @@ class Matrix4x4Test {
                 {1, 0, 1, 0}
         };
         assertArrayEquals(matrix3, matrix1.GetM());
+    }
+
+    @Test
+    void testGetM() {
+        float[][] matrix3 = new float[][]{
+                {1, 0, 1, 0},
+                {1, 0, 1, 0},
+                {1, 0, 1, 0},
+                {1, 0, 1, 0}
+        };
+        assertArrayEquals(matrix3, matrix1.getM());
     }
 
     @Test

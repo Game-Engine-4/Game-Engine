@@ -3,7 +3,6 @@ package Math;
 import org.joml.Math;
 
 public class Vector3f {
-
     private float x;
     private float y;
     private float z;
@@ -31,6 +30,43 @@ public class Vector3f {
         this.z = v.z;
     }
 
+    public float length() {
+        return (float) Math.sqrt(x * x + y * y + z * z);
+    }
+
+    public float dot(Vector3f r) {
+        return x * r.getX() + y * r.getY() + z * r.getZ();
+    }
+
+    public static float dot(Vector3f v2, Vector3f v1) {
+        return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
+    }
+
+    public float angle(Vector3f v) {
+        float dls = dot(v) / (this.length() * v.length());
+        if (dls < -1.0f)
+            dls = -1.0f;
+        else if (dls > 1.0f)
+            dls = 1.0f;
+        return (float) Math.acos(dls);
+    }
+
+    public Vector3f cross(Vector3f r) {
+        float x_ = y * r.getZ() - z * r.getY();
+        float y_ = z * r.getX() - x * r.getZ();
+        float z_ = x * r.getY() - y * r.getX();
+
+        return new Vector3f(x_, y_, z_);
+    }
+
+    public static Vector3f cross(Vector3f a, Vector3f b) {
+        //    Calculates the vector cross product of the two given vectors.
+        return new Vector3f(
+                a.y * b.z - a.z * b.y,
+                a.z * b.x - a.x * b.z,
+                a.x * b.y - a.y * b.x);
+    }
+
     public static float distanceSquared(Vector3f v1, Vector3f v2) {
         float x = v1.x - v2.x;
         float y = v1.y - v2.y;
@@ -39,7 +75,7 @@ public class Vector3f {
     }
 
     public static float distance(Vector3f v1, Vector3f v2) {
-        return Math.sqrt(distanceSquared(v1, v2));
+        return (float) Math.sqrt(distanceSquared(v1, v2));
     }
 
     public static Vector3f add(Vector3f v1, Vector3f v2) {
@@ -53,14 +89,6 @@ public class Vector3f {
         return this;
     }
 
-    public Vector3f add(final Vector3f v) {
-        return this.add(v.x, v.y, v.z);
-    }
-
-    public Vector3f sub(final Vector3f v) {
-        return this.sub(v.x, v.y, v.z);
-    }
-
     public Vector3f sub(float dx, float dy, float dz) {
         this.x -= dx;
         this.y -= dy;
@@ -70,13 +98,6 @@ public class Vector3f {
 
     public static Vector3f sub(Vector3f v1, Vector3f v2) {
         return new Vector3f(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
-    }
-
-    public Vector3f mul(Vector3f v) {
-        this.x = x * v.x;
-        this.y = y * v.y;
-        this.z = z * v.z;
-        return this;
     }
 
     public static Vector3f mul(Vector3f v, float sc) {
@@ -90,12 +111,6 @@ public class Vector3f {
         return dest;
     }
 
-    public Vector3f div(Vector3f v) {
-        this.x = this.x / v.x;
-        this.y = this.y / v.y;
-        this.z = this.z / v.z;
-        return this;
-    }
 
     public Vector3f div(Vector3f v, Vector3f dest) {
         dest.x = x / v.x;
@@ -108,21 +123,14 @@ public class Vector3f {
         return new Vector3f(v.x / sc, v.y / sc, v.z / sc);
     }
 
-    public float dot(Vector3f v) {
-        return this.x * v.x + this.y * v.y + this.z * v.z;
-    }
-
-    public static float dot(Vector3f v2, Vector3f v1) {
-        return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
-    }
 
     public Vector3f normalize() {
-        float l = this.length();
-        if (l != 0) {
-            this.x /= l;
-            this.y /= l;
-            this.z /= l;
-        }
+        float length = length();
+
+        x /= length;
+        y /= length;
+        z /= length;
+
         return this;
     }
 
@@ -131,13 +139,27 @@ public class Vector3f {
         return new Vector3f(v.x / l, v.y / l, v.z / l);
     }
 
-    public float angle(Vector3f v) {
-        float dls = dot(v) / (this.length() * v.length());
-        if (dls < -1.0f)
-            dls = -1.0f;
-        else if (dls > 1.0f)
-            dls = 1.0f;
-        return Math.acos(dls);
+
+    public Vector3f rotate(float angle, Vector3f axis) {
+
+        float sinHalfAngle = (float) Math.sin(Math.toRadians(angle / 2));
+        float cosHalfAngle = (float) Math.cos(Math.toRadians(angle / 2));
+
+        float rX = axis.getX() * sinHalfAngle;
+        float rY = axis.getY() * sinHalfAngle;
+        float rZ = axis.getZ() * sinHalfAngle;
+        float rW = cosHalfAngle;
+
+        Quaternion rotation = new Quaternion(rX, rY, rZ, rW);
+        Quaternion conjugate = rotation.conjugate();
+
+        Quaternion w = rotation.mul(this).mul(conjugate);
+
+        x = w.getX();
+        y = w.getY();
+        z = w.getZ();
+
+        return this;
     }
 
     public Vector3f setZero() {
@@ -172,41 +194,8 @@ public class Vector3f {
         return this;
     }
 
-    public float lengthSquared() {
-        return (this.x * this.x + this.y * this.y + this.z * this.z);
-    }
-
-    public static float lengthSquared(Vector3f v) {
-        return (v.x * v.x + v.y * v.y + v.z * v.z);
-    }
-
-    public float length() {
-        return Math.sqrt(this.lengthSquared());
-    }
-
-    public Vector3f cross(Vector3f v) {
-        //    Calculates the vector cross product of this vector and the given vector
-        float a = this.y * v.z - this.z * v.y;
-        float b = this.z * v.x - this.x * v.z;
-        float c = this.x * v.y - this.y * v.x;
-
-        this.x = a;
-        this.y = b;
-        this.z = c;
-
-        return this;
-    }
-
-    public static Vector3f cross(Vector3f a, Vector3f b) {
-        //    Calculates the vector cross product of the two given vectors.
-        return new Vector3f(
-                a.y * b.z - a.z * b.y,
-                a.z * b.x - a.x * b.z,
-                a.x * b.y - a.y * b.x);
-    }
-
     public Vector3f rotateX(float angle) {
-        float sin = Math.sin(angle);
+        float sin = (float) Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
         float k = this.y * cos - this.z * sin;
         float t = this.y * sin + this.z * cos;
@@ -216,7 +205,7 @@ public class Vector3f {
     }
 
     public Vector3f rotateX(float angle, Vector3f dest) {
-        float sin = Math.sin(angle);
+        float sin = (float) Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
         float k = this.y * cos - this.z * sin;
         float t = this.y * sin + this.z * cos;
@@ -227,7 +216,7 @@ public class Vector3f {
     }
 
     public Vector3f rotateY(float angle) {
-        float sin = Math.sin(angle);
+        float sin = (float) Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
         float k = this.x * cos + this.z * sin;
         float t = -this.x * sin + this.z * cos;
@@ -237,7 +226,7 @@ public class Vector3f {
     }
 
     public Vector3f rotateY(float angle, Vector3f dest) {
-        float sin = Math.sin(angle);
+        float sin = (float) Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
         float k = this.x * cos + this.z * sin;
         float t = -this.x * sin + this.z * cos;
@@ -248,7 +237,7 @@ public class Vector3f {
     }
 
     public Vector3f rotateZ(float angle) {
-        float sin = Math.sin(angle);
+        float sin = (float) Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
         float k = this.x * cos - this.y * sin;
         float t = this.x * sin + this.y * cos;
@@ -258,7 +247,7 @@ public class Vector3f {
     }
 
     public Vector3f rotateZ(float angle, Vector3f dest) {
-        float sin = Math.sin(angle);
+        float sin = (float) Math.sin(angle);
         float cos = Math.cosFromSin(sin, angle);
         float k = this.x * cos - this.y * sin;
         float t = this.x * sin + this.y * cos;
@@ -278,16 +267,68 @@ public class Vector3f {
         return false;
     }
 
+    public float lengthSquared() {
+        return (this.x * this.x + this.y * this.y + this.z * this.z);
+    }
+
+    public static float lengthSquared(Vector3f v) {
+        return (v.x * v.x + v.y * v.y + v.z * v.z);
+    }
+
+
+    public Vector3f add(Vector3f r) {
+        return new Vector3f(x + r.getX(), y + r.getY(), z + r.getZ());
+    }
+
+    public Vector3f add(float r) {
+        return new Vector3f(x + r, y + r, z + r);
+    }
+
+    public Vector3f sub(Vector3f r) {
+        return new Vector3f(x - r.getX(), y - r.getY(), z - r.getZ());
+    }
+
+    public Vector3f sub(float r) {
+        return new Vector3f(x - r, y - r, z - r);
+    }
+
+    public Vector3f mul(Vector3f r) {
+        return new Vector3f(x * r.getX(), y * r.getY(), z * r.getZ());
+    }
+
+    public Vector3f mul(float r) {
+        return new Vector3f(x * r, y * r, z * r);
+    }
+
+    public Vector3f div(Vector3f r) {
+        return new Vector3f(x / r.getX(), y / r.getY(), z / r.getZ());
+    }
+
+    public Vector3f div(float r) {
+        return new Vector3f(x / r, y / r, z / r);
+    }
+
     public float getX() {
         return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
     }
 
     public float getY() {
         return y;
     }
 
+    public void setY(float y) {
+        this.y = y;
+    }
+
     public float getZ() {
         return z;
     }
 
+    public void setZ(float z) {
+        this.z = z;
+    }
 }

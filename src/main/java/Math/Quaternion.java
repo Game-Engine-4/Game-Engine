@@ -23,10 +23,10 @@ public class Quaternion {
 
         float length = length();
 
-        x = x / length;
-        y = y / length;
-        z = z / length;
-        w = w / length;
+        x /= length;
+        y /= length;
+        z /= length;
+        w /= length;
 
         return this;
     }
@@ -37,11 +37,27 @@ public class Quaternion {
     }
 
     public Quaternion conjugate() {
-        return new Quaternion(x, -y, -z, -w);
+        return new Quaternion(-x, -y, -z, w);
     }
 
     public static Quaternion conjugate(Quaternion q) {
-        return new Quaternion(q.x, -q.y, -q.z, -q.w);
+        return new Quaternion(-q.x, -q.y, -q.z, q.w);
+    }
+
+
+    public Quaternion mul(Quaternion r) {
+        final float a11 = r.getX();
+        final float a12 = r.getY();
+        final float a13 = r.getZ();
+        final float a14 = r.getW();
+
+        final float W = w * a14 - x * a11 - y * a12 - z * a13;
+        final float X = x * a14 + w * a11 + y * a13 - z * a12;
+        final float Y = y * a14 + w * a12 + z * a11 - x * a13;
+        final float Z = z * a14 + w * a13 + x * a12 - y * a11;
+
+
+        return new Quaternion(X, Y, Z, W);
     }
 
     public static Quaternion mul(Quaternion a1, Quaternion a2) {
@@ -58,22 +74,21 @@ public class Quaternion {
         final float a24 = a2.getW();
 
         //Component of the product
-        final float X = a11 * a22 + a12 * a21 + a13 * a24 - a14 * a23;
-        final float Y = a11 * a23 - a12 * a24 + a13 * a21 + a14 * a22;
-        final float Z = a11 * a24 + a12 * a23 - a13 * a22 + a14 * a21;
-        final float W = a11 * a21 - a12 * a22 - a13 * a23 - a14 * a24;
+        final float W = a24 * a14 - a21 * a11 - a22 * a12 - a23 * a13;
+        final float X = a21 * a14 + a24 * a11 + a22 * a13 - a23 * a12;
+        final float Y = a22 * a14 + a24 * a12 + a23 * a11 - a21 * a13;
+        final float Z = a23 * a14 + a24 * a13 + a21 * a12 - a22 * a11;
 
         return new Quaternion(X, Y, Z, W);
     }
 
     public Quaternion mul(Vector3f r) {
+        float w_ = -x * r.getX() - y * r.getY() - z * r.getZ();
+        float x_ = w * r.getX() + y * r.getZ() - z * r.getY();
+        float y_ = w * r.getY() + z * r.getX() - x * r.getZ();
+        float z_ = w * r.getZ() + x * r.getY() - y * r.getX();
 
-        float X = w * r.getX() + y * r.getZ() - z * r.getY();
-        float Y = w * r.getY() + z * r.getX() - x * r.getZ();
-        float Z = w * r.getZ() + x * r.getY() - y * r.getX();
-        float W = -x * r.getX() - y * r.getY() - z * r.getZ();
-
-        return new Quaternion(X, Y, Z, W);
+        return new Quaternion(x_, y_, z_, w_);
     }
 
     public boolean equals(Object v) {

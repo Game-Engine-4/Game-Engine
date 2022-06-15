@@ -2,7 +2,6 @@ package main;
 
 import Inputs.Input;
 import Test.Demo;
-import Test.DemoBonus;
 import render.Window;
 import util.Time;
 
