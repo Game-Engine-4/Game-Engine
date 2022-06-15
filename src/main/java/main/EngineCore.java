@@ -5,7 +5,10 @@ import Test.Demo;
 import render.Window;
 import util.Time;
 
-
+/**
+ * This is the EngineCore class, this is the core of the engine, this class gets the engine running or stops it from running,
+ * Renders and updates the window.
+ */
 public class EngineCore implements Runnable {
     private Thread loopthread;
     private boolean running = false;
@@ -17,10 +20,18 @@ public class EngineCore implements Runnable {
     private Input input = new Input();
     private Game game;
 
+    /**
+     * This is a constructor for the EngineCore,
+     * this function takes one parameter for the game interface
+     * @param game This is the game interface
+     */
     public EngineCore(Game game) {
         this.game = game;
     }
 
+    /**
+     * This is the function that creates a new thread, which is then used to run the engine
+     */
     public void start() {
         if (!this.running) {
             this.running = true;
@@ -29,12 +40,20 @@ public class EngineCore implements Runnable {
         }
     }
 
+    /**
+     * This is the function that checks if the engine is stopped
+     * @return Returns true if the engine is not running
+     * @throws InterruptedException
+     */
     public boolean stop() throws InterruptedException {
         this.running = false;
         this.loopthread = null;
         return true;
     }
 
+    /**
+     * This function gets the engine up and running
+     */
     @Override
     public void run() {
         frame.init();
@@ -87,10 +106,18 @@ public class EngineCore implements Runnable {
         this.frame.cleanup();
     }
 
+    /**
+     * This function tells us if the engine is running
+     * @return Returns boolean variable, which is true if the engine is running
+     */
     public boolean isRunning() {
         return this.running;
     }
 
+    /**
+     * This function reads inputs
+     * @return Returns currently pressed key
+     */
     public Input getInput() {
         return this.input;
     }
