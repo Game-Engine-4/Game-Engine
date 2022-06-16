@@ -11,9 +11,16 @@ public class Vector3f {
     private float y;
     private float z;
 
+    /**
+     * Just empty constructor
+     */
     public Vector3f() {
     }
 
+    /**
+     * Constructor for Vector3f with the specified d coordinate
+     * @param d parameter for the xyz coordinate
+     */
     public Vector3f(float d) {
         this.x = d;
         this.y = d;
@@ -21,7 +28,7 @@ public class Vector3f {
     }
 
     /**
-     * Constructor for Vector3f with the specified xyz coordinates.
+     * Constructor for Vector3f with the specified xyz coordinates
      * @param x parameter for the x coordinate
      * @param y parameter for the y coordinate
      * @param z parameter for the z coordinate
