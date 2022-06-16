@@ -7,11 +7,19 @@ import org.joml.Math;
  * this class contains all the necessary functions to work with Vector2f
  */
 public class Vector2f {
+
+    /**
+     * This is the x coordinate of the Vector2f
+     */
     public float x;
+
+    /**
+     * This is the y coordinate of the Vector2f
+     */
     public float y;
 
     /**
-     * Constructor for Vector2f with x&y component of zero.
+     * Constructor for Vector2f with x and y component of zero.
      */
     public Vector2f() {
     }
@@ -32,17 +40,14 @@ public class Vector2f {
      *
      * @param other the Vector2f containing the xy coordinates
      */
-
     public Vector2f(Vector2f other) {
         this.set(other);
     }
 
     /**
      * This function sets x y parameters for this vector
-     *
-     * @param x This is the parameter for the x value
-     * @param y This is the parameter for the y value
-     * @return Returns this vector with new x y parameters
+     * @param x - This is the parameter for the x value
+     * @param y - This is the parameter for the y value
      */
     public void set(float x, float y) {
         this.x = x;
@@ -51,9 +56,7 @@ public class Vector2f {
 
     /**
      * This function sets x y for this vector according to vector v
-     *
-     * @param v This is the parameter for the vector
-     * @return Returns this vector with new x y parameters
+     * @param v - This is the parameter for the vector
      */
     public void set(Vector2f v) {
         this.x = v.x;
@@ -62,8 +65,6 @@ public class Vector2f {
 
     /**
      * This function sets this vector's x y to 0
-     *
-     * @return Returns vector which was set to 0
      */
     public void setZero() {
         x = 0;
@@ -193,6 +194,10 @@ public class Vector2f {
         return new Vector2f(x * cos - y * sin, x * sin + y * cos);
     }
 
+    /**
+     * Rotates about the origin.
+     * @param angle the rotation angle in radians
+     */
     public void rotateTo(float angle) {
         set(toCartesian(length(), angle));
     }
