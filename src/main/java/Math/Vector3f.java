@@ -15,7 +15,6 @@ public class Vector3f {
     }
 
     public Vector3f(float d) {
-        //    the value of all three component
         this.x = d;
         this.y = d;
         this.z = d;
@@ -230,7 +229,6 @@ public class Vector3f {
         return new Vector3f(v.x / sc, v.y / sc, v.z / sc);
     }
 
-
     /**
      * This function normalizes this vector in place.
      * @return Returns this vector
@@ -254,7 +252,6 @@ public class Vector3f {
         float l = v.length();
         return new Vector3f(v.x / l, v.y / l, v.z / l);
     }
-
 
     /**
      * This function rotates this vector by some angle on the specified axis
@@ -469,7 +466,6 @@ public class Vector3f {
     public static float lengthSquared(Vector3f v) {
         return (v.x * v.x + v.y * v.y + v.z * v.z);
     }
-
 
     /**
      * This function adds passed vector to this vector

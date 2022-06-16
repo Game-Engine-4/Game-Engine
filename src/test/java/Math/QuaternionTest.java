@@ -133,5 +133,4 @@ class QuaternionTest {
         q1.setW(3);
         assertTrue(q1.getW() == 3);
     }
-
 }

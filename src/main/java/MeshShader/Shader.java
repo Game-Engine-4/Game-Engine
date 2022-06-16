@@ -26,6 +26,7 @@ public class Shader {
             System.exit(1);
         }
     }
+
     /**
      * Method which installs a program object as part of current rendering state
      */
@@ -102,6 +103,7 @@ public class Shader {
     public void setUniformi(String uniformName, int value) {
         glUniform1i(uniforms.get(uniformName), value);
     }
+
     /**
      * Method to change value of uniform according to name and float value
      * @param uniformName Name of uniform
@@ -110,6 +112,7 @@ public class Shader {
     public void setUniformf(String uniformName, float value) {
         glUniform1f(uniforms.get(uniformName), value);
     }
+
     /**
      * Method to change value of uniform according to name and vector - getting coordinates from it
      * @param uniformName Name of uniform
@@ -118,6 +121,7 @@ public class Shader {
     public void setUniform(String uniformName, Vector3f value) {
         glUniform3f(uniforms.get(uniformName), value.getX(), value.getY(), value.getZ());
     }
+
     /**
      * Method to change value of uniform according to name and matrix
      * @param uniformName Name of uniform

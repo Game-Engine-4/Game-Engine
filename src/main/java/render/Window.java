@@ -62,21 +62,19 @@ public class Window {
             throw new RuntimeException("core.Window could not be created");
         }
 
-        // Icon
         if (getIcon() != null) {
             glfwSetWindowIcon(window, getIcon());
         }
 
-        // core.Window gets positioned in the center of the screen
         GLFWVidMode vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
         if (vidMode == null) {
             throw new RuntimeException("GLFWVidMode is null.");
         }
+
         glfwSetWindowPos(window, (vidMode.width() - getWidth()) / 2, (vidMode.height() - getHeight()) / 2);
 
         glfwMakeContextCurrent(window);
 
-        // VSync
         glfwSwapInterval(1);
 
         glfwShowWindow(window);
@@ -116,8 +114,6 @@ public class Window {
         }
         return shouldClose;
     }
-
-    // Getters for the attributes
 
     /**
      * This function gives us the width of the window
