@@ -66,7 +66,6 @@ class Vector3fTest {
         assertEquals(v3, v1.add(2, 4, 6));
     }
 
-
     @Test
     void failedNonStaticTestAdd() {
         Vector3f v3 = new Vector3f(3, 5, 9);
@@ -332,20 +331,17 @@ class Vector3fTest {
     void testSetX() {
         v1.setX(13);
         assertTrue(v1.getX() == 13);
-
     }
 
     @Test
     void testSetY() {
         v1.setY(13);
         assertTrue(v1.getY() == 13);
-
     }
 
     @Test
     void testSetZ() {
         v1.setZ(13);
         assertTrue(v1.getZ() == 13);
-
     }
 }

@@ -130,30 +130,6 @@ class Matrix4x4Test {
     }
 
     @Test
-    void testInitOrthographic() {
-        Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
-                {1, 0, 0, -3},
-                {0, 1, 0, -3},
-                {0, 0, -1, -3},
-                {0, 0, 0, 1}
-        });
-        matrix1.InitOrthographic(2, 4, 2, 4, 2, 4);
-        assertEquals(matrix3, matrix1);
-    }
-
-    @Test
-    void failedTestInitOrthographic() {
-        Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
-                {1, 0, 0, -3},
-                {0, 1, 0, -3},
-                {0, 0, -1, 3},
-                {0, 0, 0, 1}
-        });
-        matrix1.InitOrthographic(2, 4, 2, 4, 2, 4);
-        assertNotEquals(matrix3, matrix1);
-    }
-
-    @Test
     void testInitRotation() {
         Matrix4x4 matrix3 = new Matrix4x4(new float[][]{
                 {1, 2, 3, 0},

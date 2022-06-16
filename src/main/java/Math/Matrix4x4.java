@@ -67,42 +67,6 @@ public class Matrix4x4 {
         return this;
     }
 
-    //TODO
-    /**
-     *
-     * @param left
-     * @param right
-     * @param bottom
-     * @param top
-     * @param near
-     * @param far
-     * @return
-     */
-    public Matrix4x4 InitOrthographic(float left, float right, float bottom, float top, float near, float far) {
-        float width = right - left;
-        float height = top - bottom;
-        float depth = far - near;
-
-        m[0][0] = 2 / width;
-        m[0][1] = 0;
-        m[0][2] = 0;
-        m[0][3] = -(right + left) / width;
-        m[1][0] = 0;
-        m[1][1] = 2 / height;
-        m[1][2] = 0;
-        m[1][3] = -(top + bottom) / height;
-        m[2][0] = 0;
-        m[2][1] = 0;
-        m[2][2] = -2 / depth;
-        m[2][3] = -(far + near) / depth;
-        m[3][0] = 0;
-        m[3][1] = 0;
-        m[3][2] = 0;
-        m[3][3] = 1;
-
-        return this;
-    }
-
     /**
      * This function calculates and returns a rotation matrix with the given parameters
      * @param x Parameter to calculate 11,12,21,22 elements of the first matrix
@@ -281,10 +245,8 @@ public class Matrix4x4 {
         m[3][2] = 1;
         m[3][3] = 0;
 
-
         return this;
     }
-
 
     /**
      * This function calculates and returns the projection matrix for given parameters of a camera
@@ -355,7 +317,6 @@ public class Matrix4x4 {
 
         return this;
     }
-
 
     /**
      * This function multiplies the current Matrix4x4 with a second Matrix4x4
@@ -440,7 +401,6 @@ public class Matrix4x4 {
         return m;
     }
 
-
     /**
      * This function assigns specified value to the specified element of the matrix
      * @param x The x coordinate
@@ -450,5 +410,4 @@ public class Matrix4x4 {
     public void Set(int x, int y, float value) {
         m[x][y] = value;
     }
-
 }

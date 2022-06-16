@@ -10,12 +10,10 @@ class Vector2fTest {
     Vector2f v1;
     Vector2f v2;
 
-
     @BeforeEach
     void init() {
         v1 = new Vector2f(1, 2);
         v2 = new Vector2f(2, 4);
-
     }
 
     @Test
@@ -32,7 +30,6 @@ class Vector2fTest {
     void testSet() {
         v1.set(2, 2);
         assertTrue(v1.x == 2 && v1.y == 2);
-
     }
 
     @Test
@@ -77,7 +74,6 @@ class Vector2fTest {
     void failedTestNonStaticMagnitude() {
         assertNotEquals((float) Math.sqrt(22), v2.magnitude());
     }
-
 
     @Test
     void failedTestStaticMagnitude() {
@@ -138,7 +134,6 @@ class Vector2fTest {
         v1.rotateTo(1);
         Vector2f v3 = new Vector2f(1.2081527f, 1.8815863f);
         assertEquals(v3, v1);
-
     }
 
     @Test

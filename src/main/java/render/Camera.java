@@ -7,24 +7,22 @@ import util.Time;
  *  This is the camera class, this class creates a single instance of the camera,
  *  handles inputs, and according to the inputs moves or rotates the camera.
  */
-public class Camera
-{
+public class Camera {
+
     /**
      * This is a parameter that is used to specify the Y axis
      */
     public static final Vector3f yAxis = new Vector3f(0,1,0);
-
     private Vector3f pos;
     private Vector3f forward;
     private Vector3f up;
     private static Camera instance;
-    private Camera()
-    {
+
+    private Camera() {
         this(new Vector3f(0,0,0), new Vector3f(0,0,1), new Vector3f(0,1,0));
     }
 
-    private Camera(Vector3f pos, Vector3f forward, Vector3f up)
-    {
+    private Camera(Vector3f pos, Vector3f forward, Vector3f up) {
         this.pos = pos;
         this.forward = forward;
         this.up = up;
@@ -47,8 +45,7 @@ public class Camera
     /**
      * This function handles inputs, and moves the camera according to the specified input
      */
-    public void input()
-    {
+    public void input() {
 
         float movAmt = (float)(10 * Time.getDelta());
         float rotAmt = (float)(100 * Time.getDelta());
@@ -82,8 +79,7 @@ public class Camera
      * @param dir This is a parameter that specifies the direction of the movement
      * @param amt This is a parameter that specifies the amount of the movement
      */
-    public void move(Vector3f dir, float amt)
-    {
+    public void move(Vector3f dir, float amt) {
         pos = pos.add(dir.mul(amt));
     }
 
@@ -92,8 +88,7 @@ public class Camera
      * this function takes one parameter for the angle.
      * @param angle This is a parameter that specifies the angle of rotation
      */
-    public void rotateY(float angle)
-    {
+    public void rotateY(float angle) {
         Vector3f Haxis = yAxis.cross(forward);
         Haxis.normalize();
 
@@ -109,8 +104,7 @@ public class Camera
      * this function takes one parameter for the angle.
      * @param angle This is a parameter that specifies the angle of rotation
      */
-    public void rotateX(float angle)
-    {
+    public void rotateX(float angle) {
         Vector3f Haxis = yAxis.cross(forward);
         Haxis.normalize();
 
@@ -125,8 +119,7 @@ public class Camera
      * This function gives us the left direction of the camera in relation to the current position
      * @return Returns left, which is left direction of the camera
      */
-    public Vector3f getLeft()
-    {
+    public Vector3f getLeft() {
         Vector3f left = forward.cross(up);
         left.normalize();
         return left;
@@ -136,8 +129,7 @@ public class Camera
      * This function gives us the right direction of the camera in relation to the current position
      * @return Returns right, which is right direction of the camera
      */
-    public Vector3f getRight()
-    {
+    public Vector3f getRight() {
         Vector3f right = up.cross(forward);
         right.normalize();
         return right;
@@ -147,8 +139,7 @@ public class Camera
      * This is a function to get the current position of the camera.
      * @return Returns pos, which is current position of the camera
      */
-    public Vector3f getPos()
-    {
+    public Vector3f getPos() {
         return pos;
     }
 
@@ -157,8 +148,7 @@ public class Camera
      * this function takes one parameter for position
      * @param pos This is a parameter that specifies the position that we want to set the camera to
      */
-    public void setPos(Vector3f pos)
-    {
+    public void setPos(Vector3f pos) {
         this.pos = pos;
     }
 
@@ -166,8 +156,7 @@ public class Camera
      * This function gives us the forward direction of the camera in relation to the current position
      * @return Returns forward, which is forward direction of the camera
      */
-    public Vector3f getForward()
-    {
+    public Vector3f getForward() {
         return forward;
     }
 
@@ -176,8 +165,7 @@ public class Camera
      * this function takes one parameter for the direction
      * @param forward This is a parameter that specifies the forward direction
      */
-    public void setForward(Vector3f forward)
-    {
+    public void setForward(Vector3f forward) {
         this.forward = forward;
     }
 
@@ -185,8 +173,7 @@ public class Camera
      * This function gives us the upward direction of the camera
      * @return Returns up, which is upward direction of the camera
      */
-    public Vector3f getUp()
-    {
+    public Vector3f getUp() {
         return up;
     }
 
@@ -194,8 +181,7 @@ public class Camera
      * This function sets the upward direction of the camera
      * @param up This parameter specifies the upward direction
      */
-    public void setUp(Vector3f up)
-    {
+    public void setUp(Vector3f up) {
         this.up = up;
     }
 }

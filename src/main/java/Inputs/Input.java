@@ -7,19 +7,15 @@ import render.Window;
  * This is an Input class. Input class consist of Keyboard and Mouse inputs and there are several methods.
  * Some of which checks whether key or button is pressed,up or down. Some getters and so on...
  */
-
 public class Input {
-
     private GLFWKeyCallback keyboard;
     private GLFWMouseButtonCallback mouseButtons;
     private GLFWCursorPosCallback cursorPos;
     private GLFWScrollCallback mouseScroll;
-
     private static boolean[] keys = new boolean[GLFW.GLFW_KEY_LAST];
     private static boolean[] buttons = new boolean[GLFW.GLFW_MOUSE_BUTTON_LAST];
     private static double cursorX, cursorY;
     private static double scrollX, scrollY;
-
     private static int keyPressed;
     private static int buttonPressed;
 
@@ -50,9 +46,7 @@ public class Input {
          * @param action the button action.
          * @param mods   bitfield describing which modifiers keys were held down
          */
-
         mouseButtons = new GLFWMouseButtonCallback() {
-
             @Override
             public void invoke(long window, int button, int action, int mods) {
                 buttons[button] = (action == GLFW.GLFW_PRESS);
