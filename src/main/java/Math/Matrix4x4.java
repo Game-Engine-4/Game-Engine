@@ -6,10 +6,17 @@ package Math;
 public class Matrix4x4 {
     private float[][] m;
 
+    /**
+     * Initializes attribute with 4x4 matrix
+     */
     public Matrix4x4() {
         m = new float[4][4];
     }
 
+    /**
+     * Initialize object
+     * @param m The matrix to be initialized
+     */
     public Matrix4x4(float[][] m) {
         this.m = m;
     }
@@ -395,7 +402,7 @@ public class Matrix4x4 {
 
     /**
      * This function returns the matrix attribbute
-     * @return
+     * @return matrix attribute
      */
     public float[][] getM() {
         return m;

@@ -43,7 +43,7 @@ public class EngineCore implements Runnable {
     /**
      * This is the function that checks if the engine is stopped
      * @return Returns true if the engine is not running
-     * @throws InterruptedException
+     * @throws InterruptedException thrown when a thread is interrupted while it's waiting, sleeping, or otherwise occupied
      */
     public boolean stop() throws InterruptedException {
         this.running = false;
@@ -122,6 +122,10 @@ public class EngineCore implements Runnable {
         return this.input;
     }
 
+    /**
+     * Just to run EngineCore
+     * @param args Args The command line arguments.
+     */
     public static void main(String[] args) {
         EngineCore engine = new EngineCore(new Demo());
         engine.start();

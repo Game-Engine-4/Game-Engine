@@ -19,6 +19,9 @@ public class Input {
     private static int keyPressed;
     private static int buttonPressed;
 
+    /**
+     * This class implements receiving input from Keyboard and mouse
+     */
     public Input() {
 
         /**

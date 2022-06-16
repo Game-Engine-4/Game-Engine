@@ -11,14 +11,23 @@ import java.io.IOException;
 import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
 import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
 
+/**
+ *
+ */
 public class DemoBonus implements Game {
     private Mesh m;
     private Shader sh;
     private Transform tr;
 
+    /**
+     *
+     */
     public DemoBonus() {
     }
 
+    /**
+     *
+     */
     public void init() {
 
         m = new Mesh();
@@ -46,11 +55,17 @@ public class DemoBonus implements Game {
         sh.addUniform("transform");
     }
 
+    /**
+     *
+     */
     public void input() {
     }
 
     float temp = 0.0f;
 
+    /**
+     *
+     */
     @Override
     public void update() {
         System.out.println("update");
@@ -65,6 +80,9 @@ public class DemoBonus implements Game {
         this.tr.setScale(0.1f, 0.1f, 0.1f);
     }
 
+    /**
+     * 
+     */
     @Override
     public void render() {
         System.out.println("render");
