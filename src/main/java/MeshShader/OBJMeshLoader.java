@@ -6,8 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import Math.Vector3f;
 
+/**
+ * Implementation of MeshLoader interface which implements method of loading mesh from file
+ */
 public class OBJMeshLoader implements MeshLoader {
-
+    /**
+     * Method loading mesh from file which is type of "obj"
+     * @param fileName Name of the file which should be opened and read data from it
+     * @return Mesh derived from data of file
+     * @throws IOException Exception thrown if file couldn't be opened
+     */
     @Override
     public Mesh loadMesh(String fileName) throws IOException {
         String[] splitName = fileName.split("\\.");
