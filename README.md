@@ -22,7 +22,7 @@ Install EosEngine with git:
 * And everything is done correctly
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT License](https://choosealicense.com/licenses/mit/)
 
 ## Team Members
 * Nika Pkhakadze
