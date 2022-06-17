@@ -25,6 +25,7 @@ Install EosEngine with git:
 * Press the button "Tools" which is on the Navbar
 * Press Generate JavaDoc...
 * Enter the same data as you see in the picture
+
 ![2022-06-17_17-45](https://user-images.githubusercontent.com/73776293/174310794-861b139d-171f-4a30-b873-17248455eea6.png)
 
 ## License
