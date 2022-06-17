@@ -11,7 +11,7 @@ Git should be installed on your device
 * Any IDE that supports Java
 * (Dependencies that are needed, will be installed automaticlly when you will build the project)
 
-Install EosEngine with git:
+Install Game Engine with git:
 
 * Click the "CODE" on the right top corner of the project and click HTTPS then go ahead and copy the link which would look like this: 
   https://github.com/Game-Engine-4/Game-Engine.git
