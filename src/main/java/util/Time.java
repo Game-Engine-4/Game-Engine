@@ -9,6 +9,10 @@ public class Time {
     double previousTime = (double) System.nanoTime();
     double currentTime = (double) System.nanoTime();
     double deltaTime = 0.0;
+
+    /**
+     * How many frames a monitor can refresh every second.
+     */
     public final double GameRate = (double) 1.0 / this.fps;
 
     /**

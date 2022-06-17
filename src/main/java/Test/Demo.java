@@ -13,15 +13,24 @@ import java.io.IOException;
 import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
 import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
 
+/**
+ *
+ */
 public class Demo implements Game {
     private Camera camera;
     private Mesh m;
     private Shader sh;
     private Transform tr;
 
+    /**
+     *
+     */
     public Demo() {
     }
 
+    /**
+     *
+     */
     public void init() {
 
         m = new Mesh();
@@ -51,6 +60,9 @@ public class Demo implements Game {
         sh.addUniform("transform");
     }
 
+    /**
+     *
+     */
     public void input() {
         camera.input();
     }
@@ -59,6 +71,9 @@ public class Demo implements Game {
     float temp2 = 0.0f;
     float temp3 = 1.0f;
 
+    /**
+     *
+     */
     @Override
     public void update() {
         System.out.println("update");
@@ -76,6 +91,9 @@ public class Demo implements Game {
         this.tr.setRotation(0, sinTemp * 180, 0);
     }
 
+    /**
+     *
+     */
     @Override
     public void render() {
         System.out.println("render");
