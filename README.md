@@ -7,7 +7,7 @@ In this project we were obliged to create 3D rendering engine, generally A three
 ## Installation
 Before continuing, you will need the following:
 
-* git installed on the computer
+* Git installed on the computer
 * Java IDE (Example: IntelliJ, Vscode)
 * (Dependencies that are needed, will be installed automaticlly when you will build the project)
 
@@ -17,7 +17,7 @@ Install EosEngine with git:
   https://github.com/Game-Engine-4/Game-Engine.git
 * Next open terminal in the file you want to clone the project to and type this:
 
-  git clone [INSERT LINK HERE]
+  Git clone [INSERT LINK HERE]
   
 * And everything is done correctly
 
