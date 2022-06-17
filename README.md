@@ -5,10 +5,10 @@
 In this project we were obliged to create 3D rendering engine, generally A three-dimensional (3D) engine, often called a game engine, is a system used for virtual computer simulations. Game engines are commonly used in video games. A 3D engine has several area of functionality, which work together to create an immersive virtual environment. The rendering component of a game engine calculates the visual appearance of a scene, while a physics component determines how different objects should interact.
 
 ## Installation
-Before continuing, you will need the following:
+Git should be installed on your device
 
 * Git installed on the computer
-* Java IDE (Example: IntelliJ, Vscode)
+* Any IDE that supports Java
 * (Dependencies that are needed, will be installed automaticlly when you will build the project)
 
 Install EosEngine with git:
